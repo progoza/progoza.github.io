@@ -1,0 +1,240 @@
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"></script>
+    <title>Mnożenie</title>
+</head>
+<body onKeyPress="return handleEnterKey(event)">
+
+    <div class="container" >
+      
+    <div class="jumbotron">
+        <h4>Nauka tabliczki mnożenia</h4>
+    </div>
+    
+
+    <div class="row"> 
+        <div class="col">
+            Zadanie nr <span id="quest_no_title">1</span> (zakres do <span id="max_range_title">100</span>):
+            <hr/>
+        </div>
+    </div>
+
+
+    <div class="row" id="quest">
+		<div class="col-4" style="text-align: right; font-size: x-large;">
+            <span id="mult_a">0</span> * <span id="mult_b">0</span> =
+        </div>
+        <div class="col-3 input-group input-group-lg">
+                <input type="number" class="form-control" id="answer" autofocus></input>
+        </div>
+        <div class="col"></div>
+        <div class="col-4">
+			<button class="btn btn-primary btn-block" onclick="check()" >Sprawdź</button>
+		</div>
+    </div>
+
+    <div class="row" id="answ_ok" hidden="true">
+        <div class="col-8" style="font-weight: bold; font-size: large; color: green; text-align:center"> 
+		    Dobrze! :-)
+        </div>
+		<div class="col-4">
+			<button class="btn btn-secondary btn-block" onclick="prepare()" >Dalej</button>    
+		</div>
+    </div>
+
+    <div class="row" id="answ_bad" hidden="true">
+        <div class="col-8" style="font-weight: bold; font-size: large; color: red; text-align:center"> 
+		    Niestety, zła odpowiedź :-(
+        </div>
+		<div class="col-4">
+                <button class="btn btn-secondary btn-block" onclick="prepare()" >Dalej</button>    
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <hr/>
+        </div>
+    </div>
+
+    <div class="row">
+            <div class="col">
+                <a href="#" data-toggle="modal" data-target="#setRange" role="button">Ustaw zakres działań...</a> 
+                <br/>
+                <a href="#" data-toggle="modal" data-target="#showErrs" role="button">Pokaż błędy...</a>
+                <hr/>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col">
+                <span style="text-decoration:underline">Statystyki:</span> <br/>
+                Liczba zadań: <span id="quests_no">0</span> <br/>
+                Poprawnych odpowiedzi: <span id="oks_no">0</span> <br/>
+                Błędnych odpowiedzi: <span id="errs_no">0</span> <br/>
+        </div>
+	</div>
+	
+    <div class="row">
+        <div class="col" style="font-size: small; text-align:right">
+                v. 2.2
+        </div>
+	</div>
+
+    </div>
+
+
+    <script>
+        var multiplier_a = 0;
+        var multiplier_b = 0;
+        var questNo = 0;
+        var correctAnswers = 0;
+        var wrongAnswers = 0;
+        var maxRange = 100;
+        var ranges = [10,10,10,10,10,10,10,10,10,10];
+        var appState = 0;
+
+        function reset() {
+            multiplier_a = 0;
+            multiplier_b = 0;
+            questNo = 0;
+            correctAnswers = 0;
+            wrongAnswers = 0;
+            appState = 0;
+            document.getElementById("list_of_errors").innerHTML = "Jak na razie nie ma żadnych błędów!";
+            document.getElementById("max_range_title").innerHTML = maxRange;
+        }
+
+        function updateStats() {
+            document.getElementById("quest_no_title").innerHTML = questNo;
+            document.getElementById("quests_no").innerHTML = questNo;
+            document.getElementById("oks_no").innerHTML = correctAnswers;
+            document.getElementById("errs_no").innerHTML = wrongAnswers;
+        };
+
+        function prepare() {
+            multiplier_a = Math.min(10, Math.max(2, Math.round( Math.random() * 8.0  + 2.0)));
+            multiplier_b = Math.min(ranges[multiplier_a-1], Math.max(2, Math.round(Math.random() * (ranges[multiplier_a-1]-1.5) + 1.5 ) ));
+           /* if (Math.random() < 0.5) {
+                var swap = multiplier_a;
+                multiplier_a = multiplier_b;
+                multiplier_b = swap; 
+            } */
+
+            document.getElementById("mult_a").innerHTML = multiplier_a;
+	        document.getElementById("mult_b").innerHTML = multiplier_b;
+            document.getElementById("answ_ok").hidden = true;
+            document.getElementById("answ_bad").hidden = true;
+            document.getElementById("quest").hidden = false;
+            questNo++;      
+            updateStats();
+            appState = 0;
+            document.getElementById("answer").focus();
+        };
+
+        function check() {
+            if (document.getElementById("answer").value === "") {
+                return;
+            }
+            document.getElementById("quest").hidden = true;
+            var answer = parseInt(document.getElementById("answer").value);
+            document.getElementById("answer").value = null;
+            var correctAnswer = Math.round(multiplier_a * multiplier_b);
+            if (answer === correctAnswer) {
+                document.getElementById("answ_ok").hidden = false;
+                correctAnswers++;
+            }
+            else {
+                if (wrongAnswers === 0) {
+                    document.getElementById("list_of_errors").innerHTML = "";
+                }
+                document.getElementById("answ_bad").hidden = false;
+                document.getElementById("list_of_errors").innerHTML += "<li>"+multiplier_a+" * "+multiplier_b +"</li>"; 
+                wrongAnswers++;
+            }
+            updateStats();
+            appState = 1;
+        };
+
+        function recalculateRanges() {
+            var maxRangeTmp = document.getElementById("maxRange").value;
+            if (maxRangeTmp < 20 || maxRangeTmp > 100 ) {
+                window.alert("Zły zakres");
+                document.getElementById("maxRange").value = maxRange; 
+            } else {
+                maxRange = maxRangeTmp;
+                for (i=1; i<=10; i++) {
+                    ranges[i-1] = Math.floor( Math.min(10, maxRange / i) );
+                }
+                reset();
+                prepare();
+                updateStats();
+            }
+        }
+
+        function handleEnterKey(e) {
+            if((e && e.keyCode == 13) || e == 0) {
+                if (appState===0) {
+                    check();
+                }  else if (appState===1) {
+                    prepare();
+                }
+            }
+        }
+
+        prepare();
+    </script>
+
+
+<div  class="modal fade" id="setRange" tabindex="-1" role="dialog" aria-labelledby="setRangeTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Proszę ustaw zakres działań:</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Wybierz liczbę z zakresu od 20 do 100</p>
+              <input type="number" id="maxRange" class="form-control" min="20" max="100"></input>
+              <p><span style="font-size: small">Ustawienie zakresu wyzeruje statystyki.</span></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="recalculateRanges()" data-dismiss="modal">OK</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+            </div>
+          </div>
+        </div>
+</div>
+
+
+<div  class="modal fade" id="showErrs" tabindex="-1" role="dialog" aria-labelledby="showErrsTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Działania w których był błąd:</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <ul id="list_of_errors">
+                            Jak na razie nie ma żadnych błędów!
+                    </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Zamknij</button>
+            </div>
+          </div>
+        </div>
+</div>
+
+
+</body>
+</html>
