@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Lekcja 2 &middot; CS4kids
+    
+  </title>
+
+  <link rel="stylesheet" href="https://progoza.github.io/cs4kids/public/css/poole.css">
+  <link rel="stylesheet" href="https://progoza.github.io/cs4kids/public/css/syntax.css">
+  <link rel="stylesheet" href="https://progoza.github.io/cs4kids/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+</head>
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/cs4kids">
+          CS4kids
+        </a>
+      </h1>
+      <p class="lead">Podstawy programowania z użyciem c# - przygotowane dla dzieci w wieku ~ 12-14 lat</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/cs4kids">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja01.html">Lekcja 1</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item active" href="https://progoza.github.io/cs4kids/lekcja02.html">Lekcja 2</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja03.html">Lekcja 3</a>
+          
+        
+      
+
+      <span class="sidebar-nav-item">Currently v3.0.0</span>
+    </nav>
+
+    <p>Built with jekyll & customized Hyde theme.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Lekcja 2</h1>
+  <h1 id="lekcja-2---zmienne-ich-typy-i-wartości">Lekcja 2 - Zmienne, ich typy i wartości</h1>
+
+<p>W poprzedniej lekcji stworzyliśmy nasz pierwszy, prawdziwy program napisany w języku programowania C# na platformie .NET. Oczywiście, program ten nie robił zbyt wiele (jedynie wyświetlał napis „Hello, World!”, ale to dobry początek.</p>
+
+<p>W lekcji drugiej nauczymy się czym są zmienne, do czego one służą i czym są ich typy.</p>
+
+<p>Następnie – przy użyciu operatorów – wykonamy podstawowe operacje przy użyciu zmiennych.</p>
+
+<p>Na koniec nauczymy się jak przy użyciu konsoli można odczytywać informacje wpisane za pomocą klawiatury.</p>
+
+<p>Zaczynamy!</p>
+
+<h2 id="zmienne">Zmienne</h2>
+
+<p>Zmienna to bardzo ważne pojęcie w programowaniu. Za pomocą zmiennych jesteśmy w stanie zapamiętać w pamięci komputera jakąś wartość (na przykład liczbę lub napis). Następnie możemy tę wartość zmieniać według naszych potrzeb (na przykład – zwiększyć liczbę o 1 lub – dopisać do napisu kolejne słówko). W języku programowania C# zmienna posiada przypisaną do siebie nazwę (tak zwany „identyfikator”). Dzięki temu, że sami te nazwy wymyślamy, możemy w dość łatwy sposób wiedzieć do czego służy dana zmienna (o ile nadajemy naszym zmiennym nazwy które rzeczywiście coś znaczą!). Każda zmienna w języku C# posiada również swój typ, który mówi o tym, jakiego rodzaju wartości można w danej zmiennej zapisywać (np. liczby lub napisy).</p>
+
+<h3 id="nazwy-zmiennych">Nazwy zmiennych</h3>
+
+<p>Wiele początkujących programistów nie zwraca uwagi na to, jak nazywa zmienne w swoim programie. Niestety, jest to wielki błąd! Być może na samym początku wydaje się, że wymyślanie nazw zmiennych, które coś znaczą, to marnotrawstwo czasu. Niestety, szybko okazuje się, że takie myślenie jest krótkowzroczne i prowadzi do wielu błędów, kiedy tylko nasz program staje się odrobinę bardziej złożony. A więc – jak nadać zmiennej prawidłową nazwę? Jest kilka reguł, których musimy się trzymać:</p>
+
+<p>1) Istnieje pewien zbiór „zastrzeżonych” słówek, które w języku C# nie mogą być użyte jako nazwy zmiennych (na przykład: if, class, var, public … pełną listę tych słów poznamy z czasem, jednak w Visual Studio łatwo je rozpoznamy – wyświetlane są zawsze na niebiesko 😊)
+2) Nazwa składa się z dowolnej liczby znaków oraz:
+	1) Pierwszy znak musi być małą lub wielką literą, albo znakiem „<em>” lub „@”,
+	2) każdy kolejny znak musi być albo literą, albo cyfrą, albo znakiem „</em>”,
+3) Język C# rozróżnia wielkość liter w nazwach, więc „A” i „a” są traktowane jako inne litery,
+4) W nazwach zmiennych nie używa się spacji (ani żadnych innych tzw. białych znaków).</p>
+
+<p>Ok, czyli zgodnie z podanymi regułami poniższe nazwy są niepoprawne i kompilator zgłosi błąd, jeśli spróbujemy je użyć:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1abc
+
+„Nazwa zmiennej”
+
+class
+</code></pre></div></div>
+<p>Natomiast poniższe są „akceptowane” przez kompilator języka C#:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Aaaa
+
+x1
+
+_123
+
+Łe
+
+nazwazmiennej  
+</code></pre></div></div>
+
+<p>I … w zasadzie tak jest – kompilator języka pozwoli użyć nam takich nazw (nie zgłosi błędu). Są jednak pewne problemy z tymi nazwami:</p>
+
+<p>1) Przede wszystkim – większość z nich nic nie znaczy. Widząc zmienną o nazwie Aaaa nie jesteśmy w stanie stwierdzić, do czego ona może służyć. Przez to nasz kod staje się ogromnie nieczytelny, i – nawet jeśli wydaje nam się, że sami go rozumiemy – to inna osoba będzie miała z tym wielkie trudności. Z resztą, my sami, po jakimś czasie, również zapomnimy w jakim celu stworzyliśmy daną zmienną i będziemy tracić cenny czas, żeby sobie przypomnieć. Pewien znany profesor z dziedziny informatyki <a href="#_ftn1">[1]</a> powiedział, że „programy piszemy po to, żeby mogli je zrozumieć ludzie, a tylko przez przypadek po to, żeby komputery je uruchamiały”. Choć słowa te padły niemal 40 lat temu, to nadal są one niezwykle aktualne!
+2) Użyty został typowo polski znak „Ł”. W świecie oprogramowania przyjęło się stosowanie jedynie liter występujących w j. angielskim.
+3) Nie zastosowano pewnych standardów („konwencji”), które przyjęła społeczność programistów C#. Na przykład w przypadku „nazwazmiennej” nie widać wyraźnie, kiedy kończy się pierwsze a zaczyna kolejne słowo…</p>
+
+<p>Jak zatem powinny wyglądać „właściwe” nazwy zmiennych?</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>licznikPunkow
+
+kodPocztowy
+</code></pre></div></div>
+
+<p>„Dobre praktyki” jeśli chodzi o nazywanie zmiennych mówią, że:</p>
+
+<p>1) Nazwy zawsze powinny coś znaczyć i muszą nam „mówić” do czego służy dana zmienna,
+2) Nazwę zmiennej zawsze rozpoczynamy od małej litery,
+3) Jeśli nazwa zmiennej ma więcej niż jedno słowo, to słowa te łączymy używając pewnej <em>konwencji</em> – tak zwanego camelCase. Polega to na tym, że pierwsze słowo piszemy z małej litery, natomiast drugie i każde następne zaczynamy od Wielkiej Litery,
+4) Staramy się unikać cyfr oraz znaków „_”, „@” w nazwach zmiennych.</p>
+
+<h3 id="typy-zmiennych">Typy zmiennych</h3>
+
+<p>Język C# wymaga od nas, aby każda zmienna miała z góry określony typ. Oznacza to, że musimy „powiedzieć” kompilatorowi jakiego rodzaju wartości będzie można zapisywać w danej zmiennej.</p>
+
+<p>Istnieje wiele typów w języku C#. Do podstawowych zaliczamy tak zwane typy wbudowane (niektórzy nazywają je: „prymitywnymi”). Lista typów wbudowanych jest określona przez twórców języka i nie możemy sami dodać nowego, własnego typu wbudowanego. Nazwa każdego z tych typów jest „słówkiem zastrzeżonym” (czyli takim, którego nie możemy użyć jako nazwa zmiennej – wyświetlany w Visual Studio na niebiesko).</p>
+
+<p>Poniżej lista typów wbudowanych, które warto poznać już teraz:</p>
+
+<p><code class="language-plaintext highlighter-rouge">int</code>           -  to jest liczba całkowita (bez ułamków). W C# możemy w takiej zmiennej przechować wartość z zakresu od ok. -2 000 000 000 (dwa miliardy!) do ok. +2 000 000 000.</p>
+
+<p><code class="language-plaintext highlighter-rouge">double</code>    - liczba „zmiennoprzecinkowa” czyli taka, która pozwala przechować wartości ułamkowe (rzeczywiste). Uwaga! Obliczenia przy użyciu liczb zmiennoprzecinkowych są wykonywane z pewną „dokładnością” (do ok. 16 cyfr „po przecinku”). Trzeba być więc uważnym, i nie używać tego typu, jeśli zależy nam na <strong>bardzo</strong> wysokiej precyzji (jednak w większości przypadków precyzja typu double jest w zupełności wystarczająca).</p>
+
+<p><code class="language-plaintext highlighter-rouge">bool</code>       – typ logiczny, który pozwala przechowywać tylko dwie wartości „true” albo „false” (czyli „prawda” albo „fałsz”). Niby niewiele, ale okazuje się, że w programowaniu typ ten jest bardzo przydatny.</p>
+
+<p><code class="language-plaintext highlighter-rouge">char</code>       – typ „Znakowy”, który pozwala przechować znak (czyli literę albo cyfrę).</p>
+
+<p><code class="language-plaintext highlighter-rouge">string</code>     – ciąg znaków, który pozwala przechowywać napisy; bardzo użyteczny i bardzo często używany.</p>
+
+<p>Poza typami wbudowanymi są też bardziej złożone typy: np.: klasy, enumeratory, rekordy (nie przejmuj się jeśli nie wiesz co to jest, dowiemy się później!). Dużą różnicą w porównaniu do typów wbudowanych jest to, że sami możemy tworzyć nowe typy złożone 😊. Nauczymy się tego później, lecz na razie skupmy się na typach wbudowanych.</p>
+
+<h2 id="zapisywanie-wartości-przy-pomocy-literałów">Zapisywanie wartości przy pomocy „literałów”.</h2>
+
+<p>Kiedy utworzymy zmienną, najprawdopodobniej będziemy chcieli przypisać do niej jakąś wartość. Wartość tę możemy np. skopiować z innej zmiennej, lub obliczyć przy użyciu różnych funkcji dostępnych w języku C#.  Jednak zwykle musimy od czegoś zacząć – na przykład nadać zmiennej jakąś wartość początkową. Na przykład zero dla liczby. Lub literkę „a” dla znaku. Jak to zrobić? Przy użyciu tak zwanych „literałów”. Każdy typ wbudowany posiada swój własny sposób na zapisanie wartości przez „literał”:</p>
+
+<p><strong>Dla liczb całkowitych</strong>, po prostu zapisujemy wartość dziesiętnie, bez żadnych dodatkowych znaków (takich jak cudzysłowie, spacje rozdzielające cyfry itp.). Możemy użyć znaku „-” (minus) z przodu liczby, jeśli chcemy zapisać liczbę ujemną. Przykłady poniżej:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+
+-123
+
+384403
+</code></pre></div></div>
+
+<p><em>Uwaga: wartości liczb całkowitych możemy też zapisywać w postaci literałów przy użyciu innych systemów liczbowych: szesnastkowo lub binarnie. Jednak nie jest to nam teraz potrzebne i nie będziemy się tym zajmować.</em></p>
+
+<p><strong>Dla liczb rzeczywistych</strong> (zmiennoprzecinkowych) – również zapisujemy wartość, ale zawsze podajemy są z „przecinkiem” czyli ułamkiem dziesiętnym</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.0
+
+123.5
+
+-23.0
+</code></pre></div></div>
+
+<p><strong>Dla wartości logicznych</strong> mamy tylko 2 wartości i obie są uwzględnione przez twórców języka jako „słowa zastrzeżone”:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>true
+
+false
+</code></pre></div></div>
+
+<p><strong>Dla wartości znakowych</strong>, wpisujemy znak wewnątrz pojedynczych cudzysłowów, na przykład:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'a'
+
+'1' &lt;- uwaga! To jest cyfra 1, nie wartość liczbowa!
+
+**Ciągi znaków** zapisujemy wewnątrz podwójnych cudzysłowów, na przykład:
+
+"Hello, World!"
+
+"Witaj, Świecie!"
+</code></pre></div></div>
+
+<p>Specjalnym przypadkiem ciągu znaków jest tak zwany „pusty ciąg”, czyli inaczej pusty napis (nie posiadający ani jednego znaku). Zapisujemy go w taki sposób:</p>
+
+<p><code class="language-plaintext highlighter-rouge">""</code></p>
+
+<h2 id="tworzenie-zmiennych-czyli-inaczej-deklaracja-ziennych">Tworzenie zmiennych (czyli inaczej „deklaracja ziennych”)</h2>
+
+<p>Ok, teraz już wiemy jakich zasad należy przestrzegać podczas nadawania nazwy zmiennej, wiemy co to są typy i jak zapisywać wartości przy użyciu literałów. Dowiedzmy się więc jak tworzymy zmienne.</p>
+
+<p><strong>Pierwszy sposób: podanie typu w sposób jawny:</strong></p>
+
+<ul>
+  <li>najpierw piszemy nazwę typu,</li>
+  <li>następnie, po spacji, piszemy wymyśloną przez nas nazwę zmiennej,</li>
+  <li>następnie (o ile chcemy – nie jest to konieczne) – nadajemy zmiennej wartość początkową za pomocą „=” (znak „równa się”) oraz wartości po drugiej stronie tego znaku (wartość może być np. literałem),</li>
+  <li>na koniec stawiamy średnik.</li>
+</ul>
+
+<p>Przykłady:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">licznikPunktow</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+
+<span class="kt">string</span> <span class="n">nazwisko</span> <span class="p">=</span> <span class="s">"Kowalski"</span><span class="p">;</span>
+
+<span class="kt">double</span> <span class="n">odleglosc</span> <span class="p">=</span> <span class="m">10.15</span><span class="p">;</span>
+
+<span class="c1">// nie musimy od razu przypisywać wartości zmiennej, możemy to zrobić później</span>
+
+<span class="kt">char</span> <span class="n">inicjalDrugiegoImienia</span><span class="p">;</span>
+
+<span class="c1">// ...  </span>
+<span class="n">inicjalDrugiegoImienia</span> <span class="p">=</span> <span class="sc">'S'</span><span class="p">;</span>
+
+<span class="c1">// Wartość nie musi być określona przez literał. Możemy, np. skopiować  </span>
+<span class="c1">// wartość innej zmiennej:</span>
+
+<span class="kt">int</span> <span class="n">licznikPunktowPoziomuDrugiego</span> <span class="p">=</span> <span class="n">licznikPunktow</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>W jednej linijce możemy stworzyć kilka zmiennych, oddzielając je przecinkiem (jednak rzadko się to robi w przypadku zmiennych). Wtedy wszystkie te zmienne będą miały ten sam typ, np.:</p>
+
+<p><code class="language-plaintext highlighter-rouge">int licznikPunktow = 0, liczbaZyc=3;</code></p>
+
+<p><strong>Drugi sposób: użycie słówka</strong> <strong>var</strong> <strong>:</strong></p>
+
+<ul>
+  <li>najpierw używamy słówko var (od ang. variable, czyli zmienna),</li>
+  <li>po spacji wpisujemy nazwę zmiennej,</li>
+  <li>następnie musimy nadać wartość początkową (za pomocą „=”) – jest to potrzebne, żeby kompilator „domyślił się” jaki zmienna ma mieć typ,</li>
+  <li>na koniec stawiamy średnik.</li>
+</ul>
+
+<p>Przykłady:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">licznikPunktow</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+
+<span class="kt">var</span> <span class="n">nazwisko</span> <span class="p">=</span> <span class="s">"Kowalski"</span><span class="p">;</span>
+
+<span class="kt">var</span> <span class="n">odleglosc</span> <span class="p">=</span> <span class="m">10.15</span><span class="p">;</span>
+
+<span class="kt">var</span> <span class="n">licznikPunktowPoziomuDrugiego</span> <span class="p">=</span> <span class="n">licznikPunktow</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Jeśli używamy słówka <strong>var</strong>, możemy stworzyć tylko jedną zmienną w jednej linijce;</p>
+
+<h2 id="odczytywanie-polecenia-z-klawiatury-i-zapisanie-go-do-zmiennej">Odczytywanie polecenia z klawiatury i zapisanie go do zmiennej</h2>
+
+<p>Wiemy już jak tworzyć zmienne, potrafimy też przypisywać do nich wartości przy użyciu</p>
+
+<ul>
+  <li>„literałów”, czyli stałych wartości napisanych w kodzie programu,</li>
+  <li>wartości „skopiowanych” (pobranych) z innych zmiennych.</li>
+</ul>
+
+<p>Jednak do napisania ciekawego programu przydatna byłaby funkcja pozwalająca wpisać wartość przez użytkownika naszego programu i zapisać ją do zmiennej.</p>
+
+<p>W poprzednim rozdziale mówiliśmy o konsoli – o tym, że za jej pomocą można:</p>
+
+<p>a) pisać tekst na ekranie,
+ b) odczytywać wpisane przy użyciu klawiatury polecenia.</p>
+
+<p>No właśnie, jeśli chodzi o pisanie to już wiemy, że możemy wykorzystać <em>metodę</em> WriteLine(). Jak jest z czytaniem?</p>
+
+<p><code class="language-plaintext highlighter-rouge">var polecenie = Console.ReadLine();</code></p>
+
+<p>Przykład powyżej przedstawia typowe użycie klasy Console do odczytania wartości. Jak to działa?</p>
+
+<ul>
+  <li>po lewej stronie znaku „=”  tworzymy zmienną o nazwie „polecenie</li>
+  <li>po prawej stronie, wywołujemy metodę „ReadLine()” z klasy Console. Metoda ta, podczas wykonania naszego programu, poczeka aż użytkownik wpisze coś przy pomocy klawiatury i naciśnie przycisk „Enter”. Wpisany przez użytkownika tekst zostanie <em>zwrócowny</em> jako wartość (typu string) i zapisana do zmiennej „polecenie”.</li>
+  <li>na końcu, oczywiście, używamy średnika, żeby „powiedzieć kompilatorowi, że kończymy naszą instrukcję.</li>
+</ul>
+
+<p>Ok, w takim razie spróbujmy wykorzystać tę wiedzę do napisania takiego oto programu:</p>
+
+<p>1) Na początek program zachęci użytkownika poprzez napisanie tekstu „Proszę podaj swoje imię.”,
+2) Następnie program poczeka, aż użytkownik wpisze swoje imię (np. „Michał”),
+3) Kiedy użytkownik zatwierdzi wpisanie swojego imienia poprzez wciśnięcie klawisza „Enter”, nasz program wyświetli komunikat „Cześć, Michał!” i zakończy swoje działanie.</p>
+
+<p>Spróbujmy rozwiązać tę zagadkę wspólnie.</p>
+
+<p>Punkt 1. Chyba już wiemy: wykorzystamy po prostu tę samą metodę co w rozdziale 1 – WriteLine():</p>
+
+<p><code class="language-plaintext highlighter-rouge">Console.WriteLine("Proszę, podaj swoje imię.");</code></p>
+
+<p>Punkt 2. Wykorzystajmy nowopoznaną metodę ReadLine():</p>
+
+<p><code class="language-plaintext highlighter-rouge">var imieUzytkownika = Console.ReadLine();</code></p>
+
+<p>Punkt 3. Tutaj sytuacja się troszkę komplikuje. Domyślamy się, że będziemy musieli użyć ponownie metody <code class="language-plaintext highlighter-rouge">WriteLine()</code>, jednak jak zrobić, żeby wpisane imię połączyć z tekstem „Cześć,”  i z wykrzyknikiem w jednej linijce? Jest wiele sposobów, żeby to zrobić, ale na początek podam sposób chyba najprostszy. Mianowicie, poza metodą <code class="language-plaintext highlighter-rouge">WriteLine()</code>, która po wydrukowaniu tekstu na ekranie przenosi kursor do następnej linijki, jest też inna metoda – <code class="language-plaintext highlighter-rouge">Wite()</code>, która różni się tym, że po wydrukowaniu tekstu nie przenosi kursora do następnej linijki. Zatem jeśli wywołamy <code class="language-plaintext highlighter-rouge">Write()</code> kilkakrotnie – to wszystkie napisy pojawią się w tej samej linijce 😊:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Console</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="s">"Cześć, "</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="n">imieUzytkownika</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"!"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Teraz spróbuj stworzyć nowy program (projekt) przy użyciu szablonu „Aplikacja konsoli” – nazwijmy go „Lekcja02-Zmienne”:</p>
+
+<p><img src="img/Obraz02-01.png" alt="" /></p>
+
+<p>Skasujmy wygenerowane przez Visual Studio 2 linijki kodu i zastąpmy je naszym programem:</p>
+
+<p><img src="img/Obraz02-02.png" alt="" /></p>
+
+<p>Uruchamiany nasz program i sprawdzamy, czy działa rzeczywiście tak, jak tego oczekiwaliśmy 😊</p>
+
+<p>Wspaniale, właśnie udało Ci się stworzyć pierwszy „interaktywny” program komputerowy. Doskonale!</p>
+
+<p>Teraz dla wprawy rozszerzysz swój program o dodatkową funkcję. Jednak zanim to zrobisz, nauczymy się dwóch dodatkowych rzeczy.</p>
+
+<p>Pierwszą rzeczą jest odczytywanie z klawiatury wartości liczbowych. Jak wiemy, w języku C# każda zmienna ma swój typ. Kompilator sprawdza, czy czasami nie próbujemy wpisać do zmiennej wartości, której typ nie jest zgodny. Poznana przez nas metoda Console.ReadLine() zwraca zawsze wartość typu string (czyli napis) i nie jest możliwe zapisanie takiej wartości do zmiennej liczbowej (całkowitej lub rzeczywistej):</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// to niestety nie zadziała! Nie możemy zapisać wartości "string"  </span>
+<span class="c1">// do zmiennej typu "int"</span>
+
+<span class="kt">int</span> <span class="n">wartoscCalkowita</span> <span class="p">=</span> <span class="n">Console</span><span class="p">.</span><span class="nf">ReadLine</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>Na szczęście jest pewna pomocna klasa, która pozwoli nam w łatwy sposób zamienić wartość „string” na liczbę: jest to klasa Convert która posiada m.in. metody „ToInt32()” (która zamienia – czyli <em>konwertuje</em> – napis na wartość będącą liczbą całkowitą) i „ToDouble()” (która zamienia napis na liczbę rzeczywistą).</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ale to zadziała! (oczywiście pod warunkiem, że wartość którą wpisał  </span>
+<span class="c1">// użytkownik rzeczywiście będzie liczbą..)</span>
+
+<span class="kt">var</span> <span class="n">wartoscJakoNapis</span> <span class="p">=</span> <span class="n">Console</span><span class="p">.</span><span class="nf">ReadLine</span><span class="p">();</span>
+
+<span class="kt">var</span> <span class="n">wartoscCalkowita</span> <span class="p">=</span> <span class="n">Convert</span><span class="p">.</span><span class="nf">ToInt32</span><span class="p">(</span><span class="n">wartoscJakoNapis</span><span class="p">);</span>
+
+<span class="kt">var</span> <span class="n">wartoscRzeczywista</span> <span class="p">=</span> <span class="n">Convert</span><span class="p">.</span><span class="nf">ToDouble</span><span class="p">(</span><span class="n">wartoscJakoNapis</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Kolejną rzeczą, którą musimy wiedzieć przed przystąpieniem do zadania, jest to, że przy użyciu zmiennych możemy wykonywać obliczenia. Służą do tego tzw. operatory, które dokładniej poznamy w kolejnej lekcji. Na razie wystarczy, że poznamy dwa podstawowe operatory, które możemy stosować pomiędzy zmiennymi (lub literałami) tego samego typu liczbowego. Operatory te to: dodawanie, czyli „+” i mnożenie, czyli „*”</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">liczbaA</span> <span class="p">=</span> <span class="m">2.5</span><span class="p">;</span>
+
+<span class="kt">var</span> <span class="n">liczbaB</span> <span class="p">=</span> <span class="m">2.0</span><span class="p">;</span>
+
+<span class="kt">var</span> <span class="n">sumaLiczb</span> <span class="p">=</span> <span class="n">liczbaA</span> <span class="p">+</span> <span class="n">liczbaB</span><span class="p">;</span> <span class="c1">// sumaLiczb zostanie ustawiona na 4.5</span>
+
+<span class="kt">var</span> <span class="n">ilorazLiczb</span> <span class="p">=</span> <span class="n">liczbaA</span> <span class="p">*</span> <span class="n">liczbaB</span><span class="p">;</span> <span class="c1">// ilorazLiczb zostanie ustawiony na 5.0</span>
+
+<span class="kt">var</span> <span class="n">sumaLiczbPomnozonaPrzezDwa</span> <span class="p">=</span> <span class="n">sumaLiczb</span> <span class="p">*</span> <span class="m">2.0</span><span class="p">;</span> <span class="c1">// = 9.0</span>
+
+<span class="kt">var</span> <span class="n">ilorazLiczbPowiekszonyoTrzy</span> <span class="p">=</span> <span class="n">ilorazLiczb</span> <span class="p">+</span> <span class="m">3.0</span><span class="p">;</span> <span class="c1">// = 8.0</span>
+</code></pre></div></div>
+
+<p>Podobnie to działa dla liczb całkowitych:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">liczbaA</span> <span class="p">=</span> <span class="m">3</span><span class="p">;</span>
+
+<span class="kt">var</span> <span class="n">liczbaB</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
+
+<span class="kt">var</span> <span class="n">sumaLiczb</span> <span class="p">=</span> <span class="n">liczbaA</span> <span class="p">+</span> <span class="n">liczbaB</span><span class="p">;</span> <span class="c1">// sumaLiczb zostanie ustawiona na 5</span>
+
+<span class="kt">var</span> <span class="n">ilorazLiczb</span> <span class="p">=</span> <span class="n">liczbaA</span> <span class="p">*</span> <span class="n">liczbaB</span><span class="p">;</span> <span class="c1">// ilorazLiczb zostanie ustawiony na 6</span>
+
+<span class="kt">var</span> <span class="n">sumaLiczbPomnozonaPrzezDwa</span> <span class="p">=</span> <span class="n">sumaLiczb</span> <span class="p">*</span> <span class="m">2</span><span class="p">;</span> <span class="c1">// = 10</span>
+
+<span class="kt">var</span> <span class="n">ilorazLiczbPowiekszonyoTrzy</span> <span class="p">=</span> <span class="n">ilorazLiczb</span> <span class="p">+</span> <span class="m">3</span><span class="p">;</span> <span class="c1">// = 9</span>
+</code></pre></div></div>
+
+<p>Ok – to teraz zadanie. Rozszerz swój program o następującą funkcję: po przywitaniu się z użytkownikiem (co już mamy zrobione) program:</p>
+
+<p>1) Poprosi użytkownika o podanie długości boku prostokąta w cm (wartość rzeczywistą)
+2) Następnie poczeka aż użytkownik wpisze wartość,
+3) Po zatwierdzeniu poprosi o podanie długości drugiego boku prostokąta w cm (wartość rzeczywistą)
+4) Następnie poczeka aż użytkownik wpisze wartość,
+5)  Po zatwierdzeniu, program obliczy pole prostokąta (mnożąc dwie podane liczby) i wydrukuje na ekranie informację według schematu „Pole prostokąta wynosi: … centymetrów kwadratowych”.</p>
+
+<h1 id="podsumowanie">Podsumowanie</h1>
+
+<p>Poniżej przedstawiam listę najważniejszych rzeczy, których nauczyliśmy się w drugiej części naszej przygody z programowaniem:</p>
+
+<ul>
+  <li>wiemy czym są zmienne w języku programowania,</li>
+  <li>znamy reguły, jakie należy stosować podczas nadawania nazw zmiennym,</li>
+  <li>wiemy czym są typy wbudowane i znamy kilka z nich,</li>
+  <li>wiemy jak „zadeklarować” czyli utworzyć zmienną,</li>
+  <li>potrafimy w aplikacji konsoli odczytać wpisaną przez użytkownika wartość do zmiennej (zarówno do zmiennej przechowującej napis jak i do zmiennej typu liczbowego),</li>
+  <li>znamy podstawowe operatory, za pomocą których możemy wykonywać obliczenia.</li>
+</ul>
+
+<p>Teraz spędź trochę czasu i przerób napisany przez nas program według własnego pomysłu. Może napiszesz aplikację, która doda podaną przez użytkownika liczbę dzieci w klasie IV „a”, IV „b” oraz IV „c”, żeby obliczyć ile jest wszystkich uczniów klas IV? A może wymyślisz coś całkowicie innego? Spróbuj!</p>
+
+<hr />
+
+<p><a href="#_ftnref1">[1]</a> Harold Abelson, m.in. twórca języka Logo dla komputera Apple II</p>
+
+<p><a href="#_ftnref2">[2]</a> Jedną z dodatkowych reguł jest również to, że nazwy wszelkich identyfikatorów piszemy w języku angielskim, jednak podczas naszej Pierwszej przygody z programowaniem będziemy używać polskich słów (lecz bez polskich znaków)</p>
+
+</div>
+
+    </div>
+
+  </body>
+</html>
