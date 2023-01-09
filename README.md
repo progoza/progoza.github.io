@@ -11,9 +11,10 @@ _Paweł Rogoza_
 
 ### Projects
 
- - [Linux dot files](https://github.com/progoza/LinuxDotFiles)
- - [Windows dot file](https://github.com/progoza/WinDotFiles)
- - Tools I use to backup data on bdr-discs [bdr-tools](https://github.com/progoza/bdr-tools) (yes, I still occasionally backup my personal files on BD-R discs :-) )
+ - [Markdown docs](https://github.com/progoza/markdown-docs) - this is my personal [Obsidian](https://obsidian.md/) vault, a project I started recently to collect various notes I make in markdown. The plan is to build my personal knowledge base.
+ - [Linux dotfiles](https://github.com/progoza/LinuxDotFiles)  
+ - [Windows dotfiles](https://github.com/progoza/WinDotFiles) 
+ - [bdr-tools](https://github.com/progoza/bdr-tools) - Tools I developed to support preparations of backups on BD-R discs (yes, I still backup my personal files on BD-R discs every once in a while :-) )
  - [Programing basics for kids](cs4kids/index.html) - Short programming course for kids 12-14 years old. **In Polish** 
 
 ### Otherstuff
