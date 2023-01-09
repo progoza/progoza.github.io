@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Lekcja 5 &middot; CS4kids
+    
+  </title>
+
+  <link rel="stylesheet" href="https://progoza.github.io/cs4kids/public/css/poole.css">
+  <link rel="stylesheet" href="https://progoza.github.io/cs4kids/public/css/syntax.css">
+  <link rel="stylesheet" href="https://progoza.github.io/cs4kids/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+</head>
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-nav">
+      <h1>
+          CS4kids
+      </h1>
+      <p>Podstawy programowania z użyciem c# - przygotowane dla dzieci w wieku ~ 12-14 lat</p>
+    <hr></hr>
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/cs4kids">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja01.html">Lekcja 1</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja02.html">Lekcja 2</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja03.html">Lekcja 3</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja04.html">Lekcja 4</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item active" href="https://progoza.github.io/cs4kids/lekcja05.html">Lekcja 5</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja06.html">Lekcja 6</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja07.html">Lekcja 7</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja08.html">Lekcja 8</a>
+          
+        
+      
+    </nav>
+    <hr></hr>
+    <p>Built with jekyll and customized Hyde theme.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Lekcja 5</h1>
+  <h1 id="tablice-i-pętle-forforeach">Tablice i pętle for/foreach</h1>
+
+<p>W poprzednim rozdziale poznaliśmy funkcje oraz nauczyliśmy się, jak dzięki nim pisać “czystszy kod”. 
+W tym rozdziale poznamy konstrukcje, które pozwalają na przetwarzanie dużej ilości danych.</p>
+
+<h2 id="tablice">Tablice</h2>
+
+<p>Jak już wiemy, jednym z podstawowych konstrukcji, które pozwalają naszemu programowi na zapisywanie danych w pamięci komputera są zmienne (mają one swój typ, nazwę oraz pozwalają na przechowywanie wartości). Typy które poznaliśmy dotychczas, pozwalają na zapisywanie jednej wartości - takiej jak liczba, napis itp. Na przykład:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">nazwaUcznia</span> <span class="p">=</span> <span class="s">"Jan Kowalski"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>W kodzie powyżej utworzyliśmy zmeinną o nazwie “nazwaUcznia”, typie <code class="language-plaintext highlighter-rouge">string</code> (typ ten został określony przez kompilator, dlatego że przypisaliśmy do tej zmiennej <em>literał</em> o typie string) i przypisaliśmy do tej zmiennej wartość “Jan Kowalski”.
+Co jednak, kiedy chcemy zapisać nazwy wszystkich uczniów w całej klasie? Moglibyśmy utworzyć np. 30 zmiennych i do każdej z nich zapisać imię i nazwisko innej osoby. Jednak to byłoby dość niewygodne - mielibyśmy aż 30 zmiennych i musielibyśmy później zajmować się każdą zmienną osobno. Wygodniejsze byłoby stworzenie jednej konstrukcji, która pozwalałaby zapisanie nazw wszystkich uczniów w klasie. Z pomoca przychodzą nam <strong>tablice</strong>.</p>
+
+<h3 id="czym-jest-tablica-w-języku-c-jak-je-się-tworzy-i-używa">Czym jest tablica w języku C#, jak je się tworzy i używa?</h3>
+
+<p>Tablica jest <em>strukturą danych</em> (czyli konstrukcją, która pozwala na przechowywanie danych), która zawiera pewną liczbę zmiennych określonego typu (zwanych “elementami tablicy”). Możemy dostawać się do tych zmeinnych (czyli odczytywać lub zapisywać ich wartości) poprzez tak zwane <em>indeksy</em>.</p>
+
+<h3 id="jak-stworzyć-tablicę">Jak stworzyć tablicę</h3>
+
+<p>Spójżmy na przykład:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">string</span><span class="p">[]</span> <span class="n">nazwyUczniow</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[</span><span class="m">30</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>możemy to samo  zapisać krócej przy użyciu słówka <code class="language-plaintext highlighter-rouge">var</code>:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">nazwyUczniow</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[</span><span class="m">30</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>Powyższe przykłady są one równoważne, czyli robią to samo. Zalecane jest stosowanie sposobu drugiego - czyli ze słówkiem var - chyba że chcemy tylko “zadeklarować” samą tablicę (czyli jedynie ją “zapowiedzieć” ale jeszcze jej nie tworzyć):</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">string</span><span class="p">[]</span> <span class="n">nazwyUczniow</span><span class="p">;</span> <span class="c1">// zadeklarowaliśmy nową tablice, ale jej jeszcze nie możemy </span>
+						<span class="c1">// używać bo jej nie stworzyliśmy </span>
+
+<span class="n">nazwyUczniow</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[</span><span class="m">30</span><span class="p">];</span> <span class="c1">// ok, teraz tablica jest stworzona i przypisana</span>
+						<span class="c1">// do indentyfikatora "nazwyUczniow"</span>
+</code></pre></div></div>
+
+<p>Przypatrzmy się po kolei co musimy napisać, żeby stworzyć tablicę (według sposobu ze słówkiem <code class="language-plaintext highlighter-rouge">var</code>):</p>
+
+<p>1) piszemy słówko <code class="language-plaintext highlighter-rouge">var</code>
+2) wymyślamy nazwę dla naszej tablicy (reguły tworzenia nazwy dla tablic są takie same jak dla nazw zmiennych)
+3) używamy operator przypisania ‘=’,
+4) Po prawej stronie operatora przypisania używamy słówka “new” (z angielskiego “nowy”)
+5) określamy jaki będzie typ elementów tablicy  - w naszym przykładzie <code class="language-plaintext highlighter-rouge">string</code>
+6) otwieramy nawias “prostokątny” - <code class="language-plaintext highlighter-rouge">[</code>
+7) piszemy jaka będzie długość danej tablicy, czyli ile maksymalnie elementów chcemy przechowywać w naszej tablicy (w naszym przykładzie - 30 - zakładamy że w klasie może być maksymalnie 30 osób..)
+8) zamykamy “nawias prostokątny” - <code class="language-plaintext highlighter-rouge">]</code>
+9) Stawiamy średnik - <code class="language-plaintext highlighter-rouge">;</code></p>
+
+<p>Ok, udało nam się utworzyć naszą pierwszą tablicę. Posiada ona 30 elementów, w których możemy przechowywać napisy. Zaraz po utworzeniu, każdy z elementów będzie już nawet miał przypisaną domyślną (wstępną) wartość:</p>
+
+<ul>
+  <li>dla typu <code class="language-plaintext highlighter-rouge">string</code> jest to wartość <code class="language-plaintext highlighter-rouge">null</code> czyli “wartość pusta”,</li>
+  <li>dla typów liczbowych (całkowitych, rzeczywistych) doyślną wartością jest zero,</li>
+  <li>dla typu logicznego <code class="language-plaintext highlighter-rouge">bool</code> jest to wartość <code class="language-plaintext highlighter-rouge">false</code>.</li>
+</ul>
+
+<p>Spróbuj sam utworzyć swoje tablice, na przykład:</p>
+<ul>
+  <li>tablicę liczb całkowitych o nazwie “ważneDaty” w której będzie można  przechowywać ważne daty (lata) w historii Polski 😊</li>
+  <li>tablicę liczb rzeczywistych (<code class="language-plaintext highlighter-rouge">double</code>) w której będziemy mogli przechowywać ceny różnych gier - sam wymyśl nazwę dla tej tablicy.</li>
+</ul>
+
+<h3 id="dostęp-do-elementów-tablicy">Dostęp do elementów tablicy</h3>
+
+<p>Ok, tablica jest stworzona. Teraz dowiedzmy się, w jaki sposób możemy skorzystać z tej tablicy - czyli, jak możemy dostać się do elementów tablicy. Służą do tego tak zwane “indeksy”, czyli “numery” każdego elementu: każdy element posiada swój własny numer. W języku C# numerowanie elementów tablicy zawsze zaczyna się ok zera (czyli pierwszy element tablicy ma <em>indeks</em> 0, drugi element tablicy ma indeks 1, .. trzydziesty element tablicy ma indeks 29).</p>
+
+<p>Popatrzmy na przykład:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nazwyUczniow</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="s">"Jan Kowalski"</span><span class="p">;</span>
+<span class="n">nazwyUczniow</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="s">"Adam Nowak"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>W powyższym przykładzie zapisaliśmy do dwóch elementów tablicy (pierwszego i drugiego, czyli: do elementu o indeksie 0 i indeksie 1) wartości.</p>
+
+<p>A tak odczytujemy z elementy tablicy:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">nazwaUcznia</span> <span class="p">=</span> <span class="n">nazwyUczniow</span><span class="p">[</span><span class="m">1</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>Indeksem elementu tablicy jest liczba całkowita. Może to być <em>literał</em> tak w przykładzie powyżej, ale może to być również np. zmienna typu całkowitego:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">indeksWTablicy</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
+<span class="n">nazwyUczniow</span><span class="p">[</span><span class="n">indeksTablicy</span><span class="p">]</span> <span class="p">=</span> <span class="s">"Anna Kowalska"</span><span class="p">;</span> <span class="c1">// zapisujemy do elementu o indeksie 2</span>
+</code></pre></div></div>
+
+<p>Może to być również wyrażenie, którego wartością jest liczba całkowita;</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">n</span> <span class="p">=</span> <span class="m">5</span><span class="p">;</span>
+<span class="n">nazwyUczniow</span><span class="p">[</span><span class="n">n</span> <span class="p">*</span> <span class="m">2</span> <span class="p">-</span> <span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="s">"Aleksandra Nowak"</span><span class="p">;</span> <span class="c1">// zapisujemy do elementu o indeksie ..</span>
+									<span class="c1">// ..9 (bo 5 * 2 - 1 = 9)</span>
+</code></pre></div></div>
+
+<p>Elementy tablicy w języku C# są zmiennymi i możemy ich używać tak samo jak poznane dotychczas zmienne. Możemy więc np. użyć element tablicy w wyrażeniu i/lub jako parametr podczas wywoływania funkcji.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Witaj "</span> <span class="p">+</span> <span class="n">nazwyUczniow</span><span class="p">[</span><span class="m">0</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<h3 id="inicjalizacja-tablicy">Inicjalizacja tablicy</h3>
+
+<p>Poznaliśmy już jeden sposób tworzenia tablicy (przy użyciu słówka <code class="language-plaintext highlighter-rouge">new</code> oraz podanie rozmiaru tablicy). W C# możemy też tworzyć tablice i jednocześnie przypisując wartości jej elementom. Popatrzmy na przykład:</p>
+
+<p>Sposób 1:</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">tytulyGier</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[]</span> <span class="p">{</span><span class="s">"FIFA 23"</span><span class="p">,</span> <span class="s">"Fortnite"</span><span class="p">};</span>
+</code></pre></div></div>
+
+<p>Sposób 2:</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">string</span><span class="p">[]</span> <span class="n">tytulyGier</span> <span class="p">=</span> <span class="p">{</span><span class="s">"FIFA 23"</span><span class="p">,</span> <span class="s">"Fortnite"</span><span class="p">};</span>
+</code></pre></div></div>
+
+<p>Oba sposoby są jednoznaczne (robią to samo):</p>
+<ul>
+  <li>tworzą tablicę o elementach typu <code class="language-plaintext highlighter-rouge">string</code> i  nazwie “tytulyGier”,</li>
+  <li>rozmiar tablicy będzie wynosić 2 (ponieważ inicjalizując tablicę podajemy 2 napisy),</li>
+  <li>do elementu o indeksie 0 przypisana zostanie wartość “FIFA 23” a do indeksu o numerze 1 - wartość “Fortnite”.</li>
+</ul>
+
+<p>Krótko mówiąc jest to skrócony zapis kodu który inaczej możemy zapisać tak:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">tytulyGier</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[</span><span class="m">2</span><span class="p">];</span>
+<span class="n">tytulyGier</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="s">"FIFA 23"</span><span class="p">;</span>
+<span class="n">tytulyGier</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="s">"Fortnite"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="długość-tablicy">Długość tablicy</h3>
+
+<p>W języku C# długość tablicy podajemy zawsze, kiedy tablicę tworzymy (albo bezpośrednio, albo też - jeśli korzystamy z inicjalizatora tablicy - pośrednio, wymianiając elementy tablicy). Często jednak potrzebujemy wiedzieć jaki jest rozmiar tablicy już po jej stworeniu. Na przykład - będziemy tego potrzebować, pisząc funkcję, której parametrem będzie typ tablicowy: podczas pisania tej funkcji nie wiemy jeszcze jaka konkretna tablica zostanie użyta jako parametr wywołanai funkcji. Na szczęście każda tablica ma <code class="language-plaintext highlighter-rouge">właściwość</code> o nazwie <code class="language-plaintext highlighter-rouge">Length</code> (z angielskiego - długość). Możemy z niej skorzystać poprzez odwołanie “nazwaTablicy.Length”. Popatrzmy na przykład:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">NapiszCzyTablicaMaCoNajmniej5Elementow</span><span class="p">(</span><span class="kt">int</span><span class="p">[]</span> <span class="n">tablica</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">tablica</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;=</span> <span class="m">5</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Tablica ma 5 elementów lub więcej."</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Tablica ma mniej niż 5 elementów."</span><span class="p">);</span>		
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">var</span> <span class="n">tablica1</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="m">10</span><span class="p">];</span>
+<span class="kt">var</span> <span class="n">tablica2</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="m">3</span><span class="p">];</span>
+
+<span class="nf">NapiszCzyTablicaMaCoNajmniej5Elementow</span><span class="p">(</span><span class="n">tablica2</span><span class="p">);</span>
+<span class="nf">NapiszCzyTablicaMaCoNajmniej5Elementow</span><span class="p">(</span><span class="n">tablica1</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<p>Jesteś w stanie zgadnąć jaki będzie wynik uruchomienia tego programu?</p>
+
+<h2 id="pętle-for-i-foreach">Pętle “for” i “foreach”</h2>
+
+<p>Ok, tablice już mamy opanowane. Przejdźmy teraz do poznania pewnej konstrukcji, które używamy bardzo często ze strukturami danych takimi jak tablce - pętle for i foreach.
+Tak na prawdę pętla nie jest dla nas pojęciem całkiem nowym. Już w rozdziale 3 poznaliśmy konstrukcję, za pomocą której możemy zrobić pętlę - instrukcję <code class="language-plaintext highlighter-rouge">while</code>. Wykorzystaliśmy ją do napisania gry “Zgadula”. Jeśli nie pamiętasz - wróć do rozdziału 3 i przypomnij sobie.</p>
+
+<h3 id="for">for</h3>
+
+<p>Intrukcja <code class="language-plaintext highlighter-rouge">for</code> jest bardzo podobna do <code class="language-plaintext highlighter-rouge">while</code>, jednak posiada ona kilka elementów które sprawiają, że jest wygodniejsza w użyciu ze strukturami danych takimi jak tablice. Przyjrzyjmy się przykładowi:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">liczbyParzyste</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="m">10</span><span class="p">];</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">liczbyParzyste</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+<span class="p">{</span>
+<span class="err"> </span> <span class="err"> </span> <span class="n">liczbyParzyste</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="n">i</span> <span class="p">*</span> <span class="m">2</span><span class="p">;</span>
+<span class="err"> </span> <span class="err"> </span> <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">liczbyParzyste</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>W przykłądzie powyżej:
+1) najpierw tworzymy 10-elementową tablicę liczb całkowitych o nazwię <code class="language-plaintext highlighter-rouge">liczbyParzyste</code>
+2) następnie tworzymy pętle for w następujący sposób:
+	1) używamy słóka <code class="language-plaintext highlighter-rouge">for</code>,
+	2) otwieramy nawias,
+	3) wewnątrz nawiasu mamy trzy fragmenty (oddzielone od siebie dwoma średnikami)
+		1) w pierwszym fragmencie możemy stworzyć i zainicjalizować zmienną (lub zmienne), którą możemy używać wewnątrz pętli,
+		2) w drugim - podajemy tzw. warunek logiczny - tak długo jak warunek ten będzie spełniony (czyli będzie miałwartość <code class="language-plaintext highlighter-rouge">true</code>) - blok kodu pętli będzie wykonywany,
+		3) w trzecim - możemy wpisać instrukcję, która będzie wykonywana po każdym wykonaniu bloku kodu pętli (czyli po każdym tzw. przebiegu pętli),
+	4) zamykamy nawias,
+	5) Otwieramy blok kodu pętli - nawiasem klamrowym <code class="language-plaintext highlighter-rouge">{</code> ,
+	6) Piszemy kod, który chcemy, żeby wykonywał się wewnątrz pętli
+	7) Zamykamu blok kodu pętli - nawiasem klamrowym <code class="language-plaintext highlighter-rouge">}</code> .</p>
+
+<p>Spróbuj przeanalizować ten fragment kodu i przewidzieć jaki będzie wynik jego wykonania!</p>
+
+<p>Uwaga: jak wspomniałem wcześniej - instrukcje while i for są bardzo do siebie podobne. W zasadzie wszystko co można zrobić za pomocą <code class="language-plaintext highlighter-rouge">while</code>, da się rónież zrobić za pomocą <code class="language-plaintext highlighter-rouge">for</code> jak również na odwrót. To którą pętlę zastosujesz - zależy od wygody:
+1) jeśli chcemy stworzyć pętle po to, żeby wykonać jakiś kod dla wszystkich ele,emtó struktury takiej jak tablica - wygodniejszy będzie <code class="language-plaintext highlighter-rouge">for</code>,
+2) jeśli chcemy stworzyć pętle po to, żeby wykonywać jakiś kod tak długo aż nastąpi jakieś wydarzenie (ale nie wiemy z góry kiedy ono nastąpi) - wygodniejszy będzie <code class="language-plaintext highlighter-rouge">while</code>.</p>
+
+<h3 id="foreach">foreach</h3>
+
+<p>Instrukcją podobną do <code class="language-plaintext highlighter-rouge">for</code> jest <code class="language-plaintext highlighter-rouge">foreach</code>. Jest ona jego nieco uproszczoną wersją -prostszą w zapisie, ale dającą nieco mniej możliwości. Sprawdźmy na przykładzie:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">koloryTeczy</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[]</span> <span class="p">{</span><span class="s">"czerwony"</span><span class="p">,</span> <span class="s">"pomarańczowy"</span><span class="p">,</span> <span class="s">"żółty"</span><span class="p">,</span> <span class="s">"niebieski"</span><span class="p">,</span> <span class="s">"fioletowy"</span> <span class="p">};</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">kolor</span> <span class="k">in</span> <span class="n">koloryTeczy</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="err"> </span> <span class="err"> </span> <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Tęcza ma kolor: "</span> <span class="p">+</span> <span class="n">kolor</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Foreach używamy głównie wtedy, iedy chcemy odczytać wszystkie elementy tablicy i coś z nimi zrobić (nie potrzebujemy znać indeksów tych elementów, blok kodu pętli będzie wykonany dla każdego elementu jeden raz).</p>
+
+<h2 id="zadanie">Zadanie</h2>
+
+<p>TBD</p>
+
+</div>
+
+    </div>
+
+  </body>
+</html>

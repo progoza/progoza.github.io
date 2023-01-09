@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Lekcja 4 &middot; CS4kids
+    
+  </title>
+
+  <link rel="stylesheet" href="https://progoza.github.io/cs4kids/public/css/poole.css">
+  <link rel="stylesheet" href="https://progoza.github.io/cs4kids/public/css/syntax.css">
+  <link rel="stylesheet" href="https://progoza.github.io/cs4kids/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+</head>
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-nav">
+      <h1>
+          CS4kids
+      </h1>
+      <p>Podstawy programowania z użyciem c# - przygotowane dla dzieci w wieku ~ 12-14 lat</p>
+    <hr></hr>
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/cs4kids">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja01.html">Lekcja 1</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja02.html">Lekcja 2</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja03.html">Lekcja 3</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item active" href="https://progoza.github.io/cs4kids/lekcja04.html">Lekcja 4</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja05.html">Lekcja 5</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja06.html">Lekcja 6</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja07.html">Lekcja 7</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://progoza.github.io/cs4kids/lekcja08.html">Lekcja 8</a>
+          
+        
+      
+    </nav>
+    <hr></hr>
+    <p>Built with jekyll and customized Hyde theme.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">Lekcja 4</h1>
+  <h1 id="metody-czyli-funkcje">Metody czyli funkcje</h1>
+
+<p>W poprzednim rozdziale nauczyłeś się wielu operatorów, które możemy używać w języku programowania C#. 
+W tym rozdziale nauczysz co to są funkcje (zwane też “metodami”). Uwaga - mała ciekawostka! Wkrótce okaże się, że operatory to w zasadzie rónież specjalny rodzaj funkcji 😊.</p>
+
+<p>Podczas pisania programów często występuje potrzeba wykonywania wielokrotnie tych samych lub bardzo podobnych operacji. Jednak programistom zleży na tym, żeby nie powtarzać w swoim kodzie wielokrotnie takich samych fragmentów kodu. Chcemy, żeby nasz kod był zwięzły, krótki. Dzięki temu łatwiej go się czyta (czyli łatwiej jest go zrozumieć). Łatwiej się go też wtedy zmienia.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Funkcje to bardzo istotny element w sztuce programowania. Warto spędzić trochę czasu, żeby je poznać i zrozumieć, a przede wszystkim - poćwiczyć ich pisanie.
+</code></pre></div></div>
+
+<h2 id="czym-jest-funkcja-w-języku-c-i-z-czego-się-składa">Czym jest funkcja w języku C# i z czego się składa?</h2>
+
+<p>Żeby umożliwić programistom pisanie programów bez zbędnych powtórzeń fragmentów kodu, wpowadzono funkcje. W języku C# można je również nazywać metodami. Metoda to fragment kodu (zwany też “blokiem kodu”), który można uruchomić (“wywołać”) z innego miejsca naszego programu. Funkcje:</p>
+
+<ul>
+  <li>posiadają swoje nazwy,</li>
+  <li>mogą posiadać listę parametrów, czyli “zmiennych”, które można wykorzystywać w kodzie funkcji,</li>
+  <li>mogą zwracać resultat (czyli wynik),</li>
+  <li>mają swój blok kodu, czyli instrukcje, które będą wykonywane za każdym razem kiedy funkcję się uruchomi (wywoła).</li>
+</ul>
+
+<p>Poniżej przykłady funkcji:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">WyswietlPowitanie</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Dzień dobry!"</span><span class="p">);</span>
+	<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Miłego dnia."</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf">PoleProstokata</span><span class="p">(</span><span class="kt">double</span> <span class="n">bokA</span><span class="p">,</span> <span class="kt">double</span> <span class="n">bokB</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">var</span> <span class="n">pole</span> <span class="p">=</span> <span class="n">bokA</span> <span class="p">*</span> <span class="n">bokB</span><span class="p">;</span>
+	<span class="k">return</span> <span class="n">pole</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Na podstawie powyższych przykładów omówmy jak zapisuje się funkcje w C#, czyli - innymi słowy - jak wygląda <strong>definicja funkcji</strong>.</p>
+
+<ol>
+  <li>Na początku zapisujemy czy funkcja będzie zwracać rezultat (czyli “wynik” albo “wartość”) czy nie. A jeśli tak - to jaki będzie typ zwracanej wartości:
+    <ol>
+      <li>jeżeli funkcja nie będzie zwracać żadnej wartości, wpisujemy słówko <code class="language-plaintext highlighter-rouge">void</code> (tak jak w pierwszym przykładzie),</li>
+      <li>jeżeli funkcja będzie zwracać wartość, po prostu piszemy nazwę typu zwracanej wartości (w drugim przykładzie - nasza funkcja będzie zwracać wartość typu <code class="language-plaintext highlighter-rouge">double</code>),</li>
+    </ol>
+  </li>
+  <li>Następnie wymyślamy nazwę naszej funkcji (w przykładach - <code class="language-plaintext highlighter-rouge">WyswietlPowitanie</code> i <code class="language-plaintext highlighter-rouge">PoleProstokata</code>). Nazwą funkcji może być dowolny <em>identyfikator</em>. Pamiętasz jeszcze lekcję 2 i rozdział o nazwach zmiennych? Tu panują bardzo podobne reguły jeśli chodzi o nazwyanie funkcji. Jedyną różnicą jest to, że programiści umówili się, że w jężyku C# będą nazywać funkcję z dużej litery (to jest tylko umowa). Najważniejsze jednak jest to, żeby nazwa była zrozumiała i mówiła co dana funkcja robi.</li>
+  <li>Następnie otwietamy nawias “(“</li>
+  <li>Jeżeli chcemy, żeby funkcja miała parametry piszemy ich typy oraz nazwy,</li>
+  <li>Zamykamy nawias “)”  - uwaga - nawiasy używamy nawet wtedy, gdy funkcja nie ma żadnych parametrów - tak jak w pierwszym przykładzie,</li>
+  <li>Następnie otwieramy nawias “klamrowy” - “{“</li>
+  <li>Teraz piszemy kod naszej funkcji. Jeżeli funkcja posiada parametry - możemy się do nich odwoływać (czyli ich używać). Jeżeli funkcja zwraca wartość, to <strong>musimy</strong> użyć instrukcji <code class="language-plaintext highlighter-rouge">return</code> żeby tę wartość zwrócić (w przeciwnym wypadku kompilator zgłosi błąd - nasz program się nie uruchomi),</li>
+  <li>Na koniec zamykamy nawias klamrowy - “}”</li>
+</ol>
+
+<p>Uwaga! Samo zapisanie definicji funkcji nie spowoduje, że jej blok kodu będzie wykonany. Kod ten będzie wykonay dopiero wtedy, kiedy uruchomimy, czyli <strong>wywołamy</strong> funkcję.</p>
+
+<h2 id="wywołanie-funkcji">Wywołanie funkcji</h2>
+
+<p>Mając zapisaną definicję funkcji, możemy ją uruchomić. Programiści bardzo często mówią, że “wywołują” funkcje (mają na myśli po prostu ich uruchomienie).  W jaki sposób się to robi? Zobaczmy przykłady:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">WyswietlPowitanie</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">poleProstokata</span> <span class="p">=</span> <span class="nf">PoleProstokata</span><span class="p">(</span><span class="m">2.0</span><span class="p">,</span> <span class="m">3.5</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Żeby wywołać funkcję:</p>
+<ol>
+  <li>Piszemy jej nazwę</li>
+  <li>otwietamy nawias okrągły “(“</li>
+  <li>Jeżeli definicja funkcja posiada listę parametrów - przekazujemy wartości dla tych parametrów. Jeśli jest więcej niż jeden parametr, wtedy wpisujemy wartości w tej samej kolejności, w jakiej zostały one określone w definicji funkcji.</li>
+  <li>zamykamy nawias okrągły “)” i stawiamy średnik “;”.</li>
+  <li>Jeżeli funkcja zwraca wartość, to <em>możemy</em> tę wartość wykorzystać - na przykład przypisać do zmiennej jak w przykładzie powyżej.</li>
+</ol>
+
+<p>Funkcje możemy wywoływać z:</p>
+<ul>
+  <li>głównego kodu naszego programu,</li>
+  <li>z kodu innej funkcji (wtedy jedna funkcja wywołuje drugą funkcję),</li>
+  <li>w szczególnym przypadku można również wywołać funkcję z kodu tej samej funkcji (wtedy mówimy, że jest to wywołanie <em>rekurencyjne</em>, ale jest to bardzo skomplikowane i nie będziemy się tym zajmować).</li>
+</ul>
+
+<h2 id="dwie-funkcje-o-tej-samej-nazwie">Dwie funkcje o tej samej nazwie?</h2>
+
+<p>Definiując fnkcje w naszyn programie pamiętamy o tym, żeby ich nazwy mówiły co dana funkcja robi. Najczęściej więc każda funkcja będzie miałą inną nazwę. Ale czy może się zdarzyć, że stworzymy dwie funkcje o takiej samej? Okazuje się, że tak - jest to możliwe, tylko wtedy funkcje te <strong>muszą</strong> się różnić listą swoich parametrów (a to dlatego, żeby było wiadomo która funkcja ma być wywołana 😊). Przykład:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">Dodaj</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="n">a</span><span class="p">+</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">float</span> <span class="nf">Dodaj</span><span class="p">(</span><span class="kt">float</span> <span class="n">a</span><span class="p">,</span> <span class="kt">float</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="n">a</span><span class="p">+</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Powyższa definicja jest całkiem ok, mimo że funkcje tak samo się nazywają. Kiedy będziemy wywoływać te funkcje, kompilator sam wybierze “najbardziej pasującą” do przekazanych przez nas parametrów:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">wynikCalkowity</span> <span class="p">=</span> <span class="nf">Dodaj</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span> <span class="c1">// tutaj kompilator wybierze wersję 1. bo parametry są liczbami całkowitymi (int)</span>
+
+<span class="kt">var</span> <span class="n">wynikRzwczywisty</span> <span class="p">=</span> <span class="nf">Dodaj</span><span class="p">(</span><span class="m">1.25</span><span class="p">,</span> <span class="m">2.0</span><span class="p">);</span> <span class="c1">// tutaj kompilator wybierze wersję 2. bo parametry są liczbami rzeczywistymi (float)</span>
+</code></pre></div></div>
+
+<p>Uwaga: jeżeli 2 funkcje mają takie same nazwy to muszą się różnić listą parametrów, rożnica zwracanego typu nie ma znaczenia.</p>
+
+<h2 id="czysty-kod">“Czysty kod”</h2>
+
+<p>Programy, któe będziemy pisać będą stawać się coraz dłuższe i bardziej skomplikowane. Funkcje są świetnym sposobem na to, żeby utrzymać nasz kod w miarę łatwym do czytania i zrozumienia. Musimy jednak trzymać się pewnych reguł. 
+Pewien bardzo znany programista i autor książek - Robert C. Martin (znany bardziej jako “Uncle Bob” czyli “wujek Bob”) opisał zbiór zasad, jakich powinniśmy się trzymać, żeby nasz kod był “czysty” (czysty kod łatwiej jest zrozumieć, a przede wszystkim - łątwiej się go zmeinia; w odróżnieniu do kodu “brudnego” - który jest niezrozumiały i trudno się go modyfikuje). Wśród tych zasad dużo miejsca poświęca funkcjom. Między innymi funkcja powinna:
+1) Mieć jasno określoną nazwę (o tym już było 😊),
+2) Robić tylko jedną rzecz i robić ją dobrze! Jeśli musimy napisać w funkcji kod, który robi więcej niż jedną rzecz (na przykłąd, najpierw pobiera dane od użytkownika a później je przetwarza) - podzielmy ten kod na kilka części (pamiętając o tym, że z jednej funkcji możemy wywołać drugą),
+3) Kod funkcji powinien być krótki, funkcje zazwyczaj nie powinny być dłuższe niż 20 linijek kodu. Jeśli nasza funkcja staje się dłuższa - zastanówmy się czy nie dałoby się jej podzielić na kilka mniejszych funkcji..</p>
+
+<h2 id="zaraz-zaraz---podobno-operatory-to-też-funkcje">Zaraz, zaraz - podobno operatory to też funkcje?</h2>
+
+<p>Na początku tego rozdziału napisałem, że operatory to też takie specjalne funkcje. I to jest prawda. Wróćmy do przykładu funkcji “Dodaj”:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">Dodaj</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="n">a</span><span class="p">+</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Posiadając takie funkcje, możemy ich używać bardzo podobnie jak operator dodawania:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kt">var</span> <span class="n">wynikFunkcji</span> <span class="p">=</span> <span class="nf">Dodaj</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">wynikOperatora</span> <span class="p">=</span> <span class="m">1</span> <span class="p">+</span> <span class="m">2</span><span class="p">;</span> <span class="c1">// zadziała tak samo, operator "+" to po prostu </span>
+							<span class="c1">// inaczej zapisana funkcja dodawania :-)</span>
+</code></pre></div></div>
+
+<h2 id="przykłady-przykłady">Przykłady, przykłady</h2>
+
+<p>Na początek stwórzmy funkcję, która sprawdza czy podany rok jest przystępny. Wywołajmy tę funkcje dla lat 2000 i 2023 - w zależności od wyniku napiszemy czy rok jest przestępny czy nie i pdpamy ile ma dni.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">CzyRokJestPrzestepny</span><span class="p">(</span><span class="kt">int</span> <span class="n">rok</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">rok</span> <span class="p">%</span> <span class="m">1000</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> 
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="k">true</span><span class="p">;</span> <span class="c1">// jeśli rok dzieli się przez 1000 to jest przestepny</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">rok</span> <span class="p">%</span> <span class="m">100</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="k">false</span><span class="p">;</span> <span class="c1">// jeśli rok nie dzieli się przez 1000 ale dzieli się </span>
+					<span class="c1">// przez 100 - nie jest przesteny</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">rok</span> <span class="p">%</span> <span class="m">4</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="k">true</span><span class="p">;</span> <span class="c1">// jeśli rok nie dzieli się przez 100 ale dzieli się </span>
+					<span class="c1">// przez 4 to jest przestepny</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="k">false</span><span class="p">;</span> <span class="c1">// W każdym przeciwnym przypadku (czyli jeśli rok nie dzieli </span>
+				<span class="c1">// się przez 4) - rok nie jest przestępny</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nf">CzyRokJestPrzestepny</span><span class="p">(</span><span class="m">2000</span><span class="p">))</span>
+<span class="p">{</span>
+	<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Rok 2000 jest przestępny i ma 366 dni"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+	<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Rok 2000 nie jest przestępny i ma 365 dni"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nf">CzyRokJestPrzestepny</span><span class="p">(</span><span class="m">2023</span><span class="p">))</span>
+<span class="p">{</span>
+	<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Rok 2023 jest przestępny i ma 366 dni"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+	<span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Rok 2023 nie jest przestępny i ma 365 dni"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Ok, uruchom ten program - w wyniku otrzymamy:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Rok 2000 jest przestępny i ma 366 dni
+Rok 2023 nie jest przestępny i ma 365 dni
+</code></pre></div></div>
+
+<p>Niby wszystko się zgadza, ale kod nie jest zbyt… czysty. Widzimy, że część instrukcji w nim się powtarza… Spróbujmy pomyśleć czy nie dałoby się tego jakoś poprawić..</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">CzyRokJestPrzestepny</span><span class="p">(</span><span class="kt">int</span> <span class="n">rok</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">rok</span> <span class="p">%</span> <span class="m">1000</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> 
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="k">true</span><span class="p">;</span> <span class="c1">// jeśli rok dzieli się przez 1000 to jest przestepny</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">rok</span> <span class="p">%</span> <span class="m">100</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="k">false</span><span class="p">;</span> <span class="c1">// jeśli rok nie dzieli się przez 1000 ale dzieli się </span>
+					<span class="c1">// przez 100 - nie jest przesteny</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">rok</span> <span class="p">%</span> <span class="m">4</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="k">true</span><span class="p">;</span> <span class="c1">// jeśli rok nie dzieli się przez 100 ale dzieli się </span>
+					<span class="c1">// przez 4 to jest przestepny</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="k">false</span><span class="p">;</span> <span class="c1">// W każdym przeciwnym przypadku (czyli jeśli rok nie dzieli </span>
+				<span class="c1">// się przez 4) - rok nie jest przestępny</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nf">NapiszCzyRokJestPrzystepnyIIleMaDni</span><span class="p">(</span><span class="kt">int</span> <span class="n">rok</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nf">CzyRokJestPrzestepny</span><span class="p">(</span><span class="n">rok</span><span class="p">))</span> 
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Rok "</span><span class="p">+</span><span class="n">rok</span><span class="p">+</span><span class="s">" jest przestępny i ma 366 dni"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Rok "</span><span class="p">+</span><span class="n">rok</span><span class="p">+</span><span class="s">" nie jest przestępny i ma 365 dni"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nf">NapiszCzyRokJestPrzystepnyIIleMaDni</span><span class="p">(</span><span class="m">2000</span><span class="p">);</span>
+<span class="nf">NapiszCzyRokJestPrzystepnyIIleMaDni</span><span class="p">(</span><span class="m">2023</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Teraz dużo lepiej 😊.  Stworzyliśmy drugą funkcję, która zawiera kod, który był powielony. Teraz możemy wywoływać go wielokrotnie dla wybranego roku.</p>
+
+<p>Jeśli bylibyśmy bardzo dociekliwi, doszlibyśmy do wniosku, że można ten kod jeszcze trochę  “oczyścić”: teraz funkcja <code class="language-plaintext highlighter-rouge">NapiszCzyRokJestPrzystepnyIIleMaDni</code> zajmuje się nie tylko wypisaniem użytkownikowi informacji, ale rónież określa ile przestępny rok ma dni. JEśłi chcielibyśmy być całkowicie zgodni z zasadami czystego kodu (żeby każda funkcja robiła tylko jedną rzecz) - możemy zmienić ten kod na przykłąd w taki sposób:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">CzyRokJestPrzestepny</span><span class="p">(</span><span class="kt">int</span> <span class="n">rok</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">rok</span> <span class="p">%</span> <span class="m">1000</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> 
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="k">true</span><span class="p">;</span> <span class="c1">// jeśli rok dzieli się przez 1000 to jest przestepny</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">rok</span> <span class="p">%</span> <span class="m">100</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="k">false</span><span class="p">;</span> <span class="c1">// jeśli rok nie dzieli się przez 1000 ale dzieli się </span>
+					<span class="c1">// przez 100 - nie jest przesteny</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">rok</span> <span class="p">%</span> <span class="m">4</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">return</span> <span class="k">true</span><span class="p">;</span> <span class="c1">// jeśli rok nie dzieli się przez 100 ale dzieli się </span>
+					<span class="c1">// przez 4 to jest przestepny</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="k">false</span><span class="p">;</span> <span class="c1">// W każdym przeciwnym przypadku (czyli jeśli rok nie dzieli </span>
+				<span class="c1">// się przez 4) - rok nie jest przestępny</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">IleDniMaRok</span><span class="p">(</span><span class="kt">int</span> <span class="n">rok</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nf">CzyRokJestPrzestepny</span><span class="p">(</span><span class="n">rok</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="m">366</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="m">365</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nf">NapiszCzyRokJestPRzystepnyIIleMaDni</span><span class="p">(</span><span class="kt">int</span> <span class="n">rok</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">ileDniMaRok</span> <span class="p">=</span> <span class="nf">IleDniMaRok</span><span class="p">(</span><span class="n">rok</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nf">CzyRokJestPrzestepny</span><span class="p">(</span><span class="n">rok</span><span class="p">))</span> 
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Rok "</span> <span class="p">+</span> <span class="n">rok</span> <span class="p">+</span> <span class="s">" jest przestępny i ma "</span> <span class="p">+</span> <span class="n">ileDniMaRok</span> <span class="p">+</span> <span class="s">" dni"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Rok "</span> <span class="p">+</span> <span class="n">rok</span> <span class="p">+</span> <span class="s">" nie jest przestępny i ma "</span> <span class="p">+</span> <span class="n">ileDniMaRok</span> <span class="p">+</span> <span class="s">" dni"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nf">NapiszCzyRokJestPRzystepnyIIleMaDni</span><span class="p">(</span><span class="m">2000</span><span class="p">);</span>
+<span class="nf">NapiszCzyRokJestPRzystepnyIIleMaDni</span><span class="p">(</span><span class="m">2023</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Zrobiliśmy kolejną metodę (funkcję) - <code class="language-plaintext highlighter-rouge">IleDniMaRok</code>. Teraz to oka określa liczbę dni w roku. Natomiast funkcja “NapiszCzyRokJestPRzystepnyIIleMaDni” - rzeczywiście teraz zajmuje się tylko drukowaniem informacji użytkownikowi.</p>
+
+<h2 id="zadanie">Zadanie</h2>
+
+<p>TBD</p>
+
+
+</div>
+
+    </div>
+
+  </body>
+</html>

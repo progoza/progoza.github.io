@@ -14,6 +14,7 @@ _Paweł Rogoza_
  - [Linux dot files](https://github.com/progoza/LinuxDotFiles)
  - [Windows dot file](https://github.com/progoza/WinDotFiles)
  - Tools I use to backup data on bdr-discs [bdr-tools](https://github.com/progoza/bdr-tools) (yes, I still occasionally backup my personal files on BD-R discs :-) )
+ - [Programing basics for kids](cs4kids/index.html) - Short programming course for kids 12-14 years old. **In Polish** 
 
 ### Otherstuff
 
