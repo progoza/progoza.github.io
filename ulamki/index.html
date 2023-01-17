@@ -27,12 +27,10 @@
 
 
     <div class="row" id="quest">
-		<div class="col-3" style="text-align: right; padding-top: 2em; font-size: x-large; height: 6em;">
-        
-            <span id="mult_a">0</span> + <span id="mult_b">0</span> =
-        
+		<div class="col" style="text-align: center; padding-top: 2em; font-size: x-large; height: 6em;">
+            <span id="fract_a">0</span> <span id="fract_sign">+</span> <span id="fract_b">0</span> =
         </div>
-        <div class="col-6 input-group input-group-lg">
+        <div class="col input-group input-group-lg">
             <table>
                 <tr>
                     <td rowspan="3"><input type="number" class="form-control" id="answer_t" autofocus></input></td>
@@ -47,35 +45,38 @@
                 </tr>
             </table>
         </div>
-        <div class="col"></div>
-        <div class="col-2" style="padding-top: 2em; font-size: x-large;">
+        <div class="w-100 d-md-none"></div>
+        <div class="col" style="padding-top: 2em; font-size: x-large;">
 			<button class="btn btn-primary btn-block" onclick="check()" >Sprawdź</button>
 		</div>
     </div>
 
     <div class="row" id="answ_ok" hidden="true">
-        <div class="col-8" style="height: 6em; padding-top: 2em; font-weight: bold; font-size: x-large; color: green; text-align:center"> 
+        <div class="col" style="height: 6em; padding-top: 2em; font-weight: bold; font-size: x-large; color: green; text-align:center"> 
 		    Dobrze! :-)
         </div>
-		<div class="col-4" style="padding-top: 2em; font-size: x-large;">
+        <div class="w-100 d-md-none"></div>
+        <div class="col" style="padding-top: 2em; font-size: x-large;">
 			<button id="next1" class="btn btn-secondary btn-block" onclick="prepare()" >Dalej</button>    
 		</div>
     </div>
 
     <div class="row" id="answ_almost_ok" hidden="true">
-        <div class="col-8" style="height: 6em; padding-top: 2em; font-weight: bold; font-size: x-large; color: orange; text-align:center"> 
+        <div class="col" style="height: 6em; padding-top: 2em; font-weight: bold; font-size: x-large; color: orange; text-align:center"> 
 		    Dobrze, ale nie podałeś postaci właściwej. :-|
         </div>
-		<div class="col-4" style="padding-top: 2em; font-size: x-large;">
+        <div class="w-100 d-md-none"></div>
+        <div class="col" style="padding-top: 2em; font-size: x-large;">
 			<button id="next2" class="btn btn-secondary btn-block" onclick="prepare()" >Dalej</button>    
 		</div>
     </div>
 
     <div class="row" id="answ_bad" hidden="true">
-        <div class="col-8" style="height: 6em; padding-top: 2em; font-weight: bold; font-size: x-large; color: red; text-align:center"> 
+        <div class="col" style="height: 6em; padding-top: 2em; font-weight: bold; font-size: x-large; color: red; text-align:center"> 
 		    Niestety, zła odpowiedź :-(
         </div>
-		<div class="col-4" style="padding-top: 2em; font-size: x-large;">
+        <div class="w-100 d-md-none"></div>
+        <div class="col" style="padding-top: 2em; font-size: x-large;">
                 <button id="next3" class="btn btn-secondary btn-block" onclick="prepare()" >Dalej</button>    
         </div>
     </div>
@@ -119,7 +120,7 @@
             return int1 % division === 0 && int2 % division === 0;
         }
 
-        var primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
+        var primes = [2, 3, 5, 7];
 
         class VulgarFraction {
             extractTotalPart() {
@@ -164,6 +165,13 @@
                     thisNormalized.denominator === fractionNormalized.denominator;
             }
 
+            compareTo(fraction) {
+                let cmp = this.sub(fraction);
+                if (cmp.sign < 0) return -1
+                else if (cmp.totalPart === 0 && cmp.meter === 0) return 0;
+                return 1;
+            }
+
             toString() {
                 let retVal = "";
                 if (this.sign < 0) retVal = "- "
@@ -177,9 +185,14 @@
                 return retVal.trim();
             }
 
-            toHtmlString() {
+            signAsString() {
+                if (this.sign < 0) return "-";
+                return "+";
+            }
+
+            toHtmlString(suppressSign) {
                 let retVal = "";
-                if (this.sign < 0) retVal = "- "
+                if (this.sign < 0 && !suppressSign) retVal = "- "
                 if (this.totalPart > 0) retVal = retVal + this.totalPart;
                 if (this.meter > 0) {
                     retVal = retVal + "<sup>" + this.meter + "</sup>&frasl;<sub>" + this.denominator + "</sub>";
@@ -196,6 +209,11 @@
                 let commonDenominator = this.denominator * fraction2.denominator;
                 let fractionsSum = new VulgarFraction(1, 0, firstMeter + secondMeter, commonDenominator);
                 return fractionsSum.normalize();
+            }
+
+            sub(fraction) {
+                let fractionNegative = new VulgarFraction(fraction.sign * -1, fraction.totalPart, fraction.meter, fraction.denominator);
+                return this.add(fractionNegative);
             }
 
             constructor (sign, totalPart, meter, denominator) {
@@ -256,8 +274,20 @@
             fraction_a = drawFraction();
             fraction_b = drawFraction();
 
-            document.getElementById("mult_a").innerHTML = fraction_a.toHtmlString();
-	        document.getElementById("mult_b").innerHTML = fraction_b.toHtmlString();
+            let substracting = Math.random() > 0.6;
+            if (substracting) {
+                let secondIsBigger = fraction_a.compareTo(fraction_b) === -1;
+                if (secondIsBigger) {
+                    let swp = fraction_a;
+                    fraction_a = fraction_b;
+                    fraction_b = swp;
+                }
+                fraction_b.sign *= -1;
+            }
+
+            document.getElementById("fract_a").innerHTML = fraction_a.toHtmlString();
+            document.getElementById("fract_sign").innerHTML = fraction_b.signAsString();
+	        document.getElementById("fract_b").innerHTML = fraction_b.toHtmlString(true);
             document.getElementById("answ_ok").hidden = true;
             document.getElementById("answ_almost_ok").hidden = true;
             document.getElementById("answ_bad").hidden = true;
