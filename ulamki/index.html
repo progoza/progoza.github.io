@@ -1,0 +1,370 @@
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <title>Ułamki</title>
+</head>
+	
+<body onKeyPress="return handleEnterKey(event)">
+
+    <div class="container" >
+      
+    <div class="jumbotron">
+        <h4>Nauka dodawania i odejmowania ułamków zwykłych</h4>
+    </div>
+    
+
+    <div class="row"> 
+        <div class="col">
+            Zadanie nr <span id="quest_no_title">1</span> (zakres dzielnika do <span id="max_range_title">10</span>):
+            <hr/>
+        </div>
+    </div>
+
+
+    <div class="row" id="quest">
+		<div class="col-4" style="text-align: right; padding-top: 2em; font-size: x-large; height: 6em;">
+        
+            <span id="mult_a">0</span> + <span id="mult_b">0</span> =
+        
+        </div>
+        <div class="col-3 input-group input-group-lg">
+
+            <table>
+                <tr>
+                    <td rowspan="3"><input type="number" class="form-control" id="answer_t" autofocus></input></td>
+                    <td rowspan="3">&nbsp;</td>
+                    <td><input type="number" class="form-control" id="answer_m" ></input></td>
+                </tr>
+                <tr>
+                    <td><hr/></td>
+                </tr>
+                <tr>
+                    <td><input type="number" class="form-control" id="answer_d" ></input></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col"></div>
+        <div class="col-4" style="padding-top: 2em; font-size: x-large;">
+			<button class="btn btn-primary btn-block" onclick="check()" >Sprawdź</button>
+		</div>
+    </div>
+
+    <div class="row" id="answ_ok" hidden="true">
+        <div class="col-8" style="height: 6em; padding-top: 2em; font-weight: bold; font-size: x-large; color: green; text-align:center"> 
+		    Dobrze! :-)
+        </div>
+		<div class="col-4" style="padding-top: 2em; font-size: x-large;">
+			<button id="next1" class="btn btn-secondary btn-block" onclick="prepare()" >Dalej</button>    
+		</div>
+    </div>
+
+    <div class="row" id="answ_almost_ok" hidden="true">
+        <div class="col-8" style="height: 6em; padding-top: 2em; font-weight: bold; font-size: x-large; color: orange; text-align:center"> 
+		    Dobrze, ale nie podałeś postaci właściwej. :-|
+        </div>
+		<div class="col-4" style="padding-top: 2em; font-size: x-large;">
+			<button id="next2" class="btn btn-secondary btn-block" onclick="prepare()" >Dalej</button>    
+		</div>
+    </div>
+
+    <div class="row" id="answ_bad" hidden="true">
+        <div class="col-8" style="height: 6em; padding-top: 2em; font-weight: bold; font-size: x-large; color: red; text-align:center"> 
+		    Niestety, zła odpowiedź :-(
+        </div>
+		<div class="col-4" style="padding-top: 2em; font-size: x-large;">
+                <button id="next3" class="btn btn-secondary btn-block" onclick="prepare()" >Dalej</button>    
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <hr/>
+        </div>
+    </div>
+
+    <div class="row">
+            <div class="col">
+                <a href="#" data-toggle="modal" data-target="#setRange" role="button">Ustaw zakres działań...</a> 
+                <br/>
+                <a href="#" data-toggle="modal" data-target="#showErrs" role="button">Pokaż błędy...</a>
+                <hr/>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col">
+                <span style="text-decoration:underline">Statystyki:</span> <br/>
+                Liczba zadań: <span id="quests_no">0</span> <br/>
+                Poprawnych odpowiedzi: <span id="oks_no">0</span> <br/>
+                Poprawnych odpowiedzi, ale w postaci niewłaściwej: <span id="almosts_no">0</span> <br/>
+                Błędnych odpowiedzi: <span id="errs_no">0</span> <br/>
+        </div>
+	</div>
+	
+    <div class="row">
+        <div class="col" style="font-size: small; text-align:right">
+                v. 0.1
+        </div>
+	</div>
+
+    </div>
+
+
+    <script>
+        function areTwoIntgersDivisable(int1, int2, division) {
+            return int1 % division === 0 && int2 % division === 0;
+        }
+
+        var primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
+
+        class VulgarFraction {
+            extractTotalPart() {
+                let newTotalPart = this.totalPart + Math.floor(this.meter / this.denominator);
+                let newMeter = this.meter % this.denominator;
+                return new VulgarFraction(this.sign, newTotalPart, newMeter, this.denominator); 
+            }
+
+            reduce() {
+                let newMeter = this.meter;
+                let newDenominator = this.denominator;
+                let i=0;
+                while (i < primes.length) {
+                    let prime = primes[i];
+                    if (areTwoIntgersDivisable(newMeter, newDenominator, prime)) {
+                        newMeter = Math.floor(newMeter / prime);
+                        newDenominator = Math.floor(newDenominator / prime);
+                    } else {
+                        i++;
+                    }
+                }
+                return new VulgarFraction(this.sign, this.totalPart, newMeter, newDenominator);
+            }
+
+            normalize() {
+                return this.extractTotalPart().reduce();
+            }
+
+            equals(fraction) {
+                return this.sign === fraction.sign &&
+                    this.totalPart === fraction.totalPart &&
+                    this.meter === fraction.meter &&
+                    this.denominator === fraction.denominator;
+            }
+
+            equivalents(fraction) {
+                let thisNormalized = this.normalize();
+                let fractionNormalized = fraction.normalize();
+                return thisNormalized.sign === fractionNormalized.sign &&
+                    thisNormalized.totalPart === fractionNormalized.totalPart &&
+                    thisNormalized.meter === fractionNormalized.meter &&
+                    thisNormalized.denominator === fractionNormalized.denominator;
+            }
+
+            toString() {
+                let retVal = "";
+                if (this.sign < 0) retVal = "- "
+                if (this.totalPart > 0) retVal = retVal + this.totalPart;
+                if (this.meter > 0) {
+                    retVal = retVal + " (" + this.meter + " / " + this.denominator + ")";
+                } 
+                else if (this.totalPart === 0) {
+                    return "0";
+                }
+                return retVal.trim();
+            }
+
+            add(fraction2) {
+                let firstMeter = this.sign * (this.meter + this.totalPart * this.denominator)  * fraction2.denominator;
+                let secondMeter = fraction2.sign * (fraction2.meter + fraction2.totalPart * fraction2.denominator) * this.denominator;
+                let commonDenominator = this.denominator * fraction2.denominator;
+                let fractionsSum = new VulgarFraction(1, 0, firstMeter + secondMeter, commonDenominator);
+                return fractionsSum.normalize();
+            }
+
+            constructor (sign, totalPart, meter, denominator) {
+                if (sign < 0) {
+                    sign = -1;
+                } else {
+                    sign = 1;
+                }
+                if (totalPart < 0) sign *= -1;
+                if (meter < 0) sign *= -1;
+                if (denominator < 0) sign *= -1;
+                this.sign = sign;
+                this.totalPart = Math.abs(totalPart);
+                this.meter = Math.abs(meter),
+                this.denominator = Math.abs(denominator);
+            }
+        }
+
+        var fraction_a = null;
+        var fraction_b = null;
+        var questNo = 0;
+        var correctAnswers = 0;
+        var almostCorrectAnswers = 0;
+        var wrongAnswers = 0;
+        var maxDenominator = 10;
+        var appState = 0;
+
+        function reset() {
+            fraction_a = null;
+            fraction_b = null;
+            questNo = 0;
+            correctAnswers = 0;
+            almostCorrectAnswers = 0;
+            wrongAnswers = 0;
+            appState = 0;
+            document.getElementById("list_of_errors").innerHTML = "Jak na razie nie ma żadnych błędów!";
+            document.getElementById("max_range_title").innerHTML = maxDenominator;
+        }
+
+        function updateStats() {
+            document.getElementById("quest_no_title").innerHTML = questNo;
+            document.getElementById("quests_no").innerHTML = questNo;
+            document.getElementById("oks_no").innerHTML = correctAnswers;
+            document.getElementById("almosts_no").innerHTML = almostCorrectAnswers;
+            document.getElementById("errs_no").innerHTML = wrongAnswers;
+        };
+
+        function drawFraction() {
+            let randomTotal = Math.floor(Math.random() * 3.0 + 0.1);
+            let randomMeter = Math.max( 1, Math.floor(Math.random() * maxDenominator + 1.0) );
+            let randomDenominator = Math.max( 2, Math.floor(Math.random() * maxDenominator) );
+            let fraction = new VulgarFraction(1, randomTotal, randomMeter, randomDenominator);
+            return fraction.normalize();
+        }
+
+        function prepare() { 
+
+            fraction_a = drawFraction();
+            fraction_b = drawFraction();
+
+            document.getElementById("mult_a").innerHTML = fraction_a.toString();
+	        document.getElementById("mult_b").innerHTML = fraction_b.toString();
+            document.getElementById("answ_ok").hidden = true;
+            document.getElementById("answ_almost_ok").hidden = true;
+            document.getElementById("answ_bad").hidden = true;
+            document.getElementById("quest").hidden = false;
+            questNo++;
+            updateStats();
+            appState = 0;
+            document.getElementById("answer_t").focus();
+        };
+
+        function check() {
+            if (document.getElementById("answer_d").value === "" || document.getElementById("answer_d").value === "0" ) {
+                return;
+            }
+            document.getElementById("quest").hidden = true;
+
+            let answer_t = parseInt(document.getElementById("answer_t").value);
+            let answer_m = parseInt(document.getElementById("answer_m").value);
+            let answer_d = parseInt(document.getElementById("answer_d").value);
+
+            document.getElementById("answer_t").value = null;
+            document.getElementById("answer_m").value = null;
+            document.getElementById("answer_d").value = null;
+            
+            let correctAnswer = fraction_a.add(fraction_b);
+            let answer = new VulgarFraction(1, answer_t, answer_m, answer_d);
+
+            if (answer.equals(correctAnswer)) {
+                document.getElementById("answ_ok").hidden = false;
+                document.getElementById("next1").focus();
+                correctAnswers++;
+            } else if (answer.equivalents(correctAnswer)) {
+                document.getElementById("answ_almost_ok").hidden = false;
+                document.getElementById("next2").focus();
+                almostCorrectAnswers++;
+            } else {
+                if (wrongAnswers === 0) {
+                    document.getElementById("list_of_errors").innerHTML = "";
+                }
+                document.getElementById("list_of_errors").innerHTML += "<li>"+fraction_a.toString()+" + "+fraction_b.toString() +"</li>"; 
+                wrongAnswers++;
+                document.getElementById("answ_bad").hidden = false;
+                document.getElementById("next3").focus();
+            }
+            updateStats();
+            appState = 1;
+        };
+
+        function recalculateRanges() {
+            let maxRangeTmp = document.getElementById("maxRange").value;
+            if (maxRangeTmp < 3 || maxRangeTmp > 10 ) {
+                window.alert("Zły zakres");
+                document.getElementById("maxRange").value = maxDenominator; 
+            } else {
+                maxDenominator = maxRangeTmp;
+                reset();
+                prepare();
+                updateStats();
+            }
+        }
+
+        function handleEnterKey(e) {
+            if((e && e.keyCode == 13) || e == 0) {
+                if (appState===0) {
+                    check();
+                }  else if (appState===1) {
+                    prepare();
+                }
+            }
+        }
+
+        prepare();
+    </script>
+
+
+<div  class="modal fade" id="setRange" tabindex="-1" role="dialog" aria-labelledby="setRangeTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Proszę ustaw zakres działań:</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Wybierz liczbę z zakresu od 3 do 10</p>
+              <input type="number" id="maxRange" class="form-control" min="3" max="10"></input>
+              <p><span style="font-size: small">Ustawienie zakresu wyzeruje statystyki.</span></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="recalculateRanges()" data-dismiss="modal">OK</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+            </div>
+          </div>
+        </div>
+</div>
+
+
+<div  class="modal fade" id="showErrs" tabindex="-1" role="dialog" aria-labelledby="showErrsTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Działania w których był błąd:</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <ul id="list_of_errors">
+                            Jak na razie nie ma żadnych błędów!
+                    </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Zamknij</button>
+            </div>
+          </div>
+        </div>
+</div>
+
+
+</body>
+</html>
