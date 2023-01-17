@@ -19,8 +19,6 @@ _Paweł Rogoza_
 
 ### Otherstuff
 
- - Tool for kids to learn maths (in Polish):
-   - multiplication table [Tabliczka mnożenia](mnozenie/index.html)
-   - adding fractions [Dodawanie ułamków](ulamki/index.html) 
+ - Tool for kids to learn maths (__in Polish__): multiplication table [Tabliczka mnożenia](mnozenie/index.html), adding fractions [Dodawanie ułamków](ulamki/index.html) 
  - Report from the trip [around-the-world](https://www.youtube.com/watch?v=mb5Yl3ags2o) I made in 2018.
 

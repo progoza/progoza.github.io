@@ -177,6 +177,19 @@
                 return retVal.trim();
             }
 
+            toHtmlString() {
+                let retVal = "";
+                if (this.sign < 0) retVal = "- "
+                if (this.totalPart > 0) retVal = retVal + this.totalPart;
+                if (this.meter > 0) {
+                    retVal = retVal + "<sup>" + this.meter + "</sup>&frasl;<sub>" + this.denominator + "</sub>";
+                } 
+                else if (this.totalPart === 0) {
+                    return "0";
+                }
+                return retVal.trim();
+            }
+
             add(fraction2) {
                 let firstMeter = this.sign * (this.meter + this.totalPart * this.denominator)  * fraction2.denominator;
                 let secondMeter = fraction2.sign * (fraction2.meter + fraction2.totalPart * fraction2.denominator) * this.denominator;
@@ -243,8 +256,8 @@
             fraction_a = drawFraction();
             fraction_b = drawFraction();
 
-            document.getElementById("mult_a").innerHTML = fraction_a.toString();
-	        document.getElementById("mult_b").innerHTML = fraction_b.toString();
+            document.getElementById("mult_a").innerHTML = fraction_a.toHtmlString();
+	        document.getElementById("mult_b").innerHTML = fraction_b.toHtmlString();
             document.getElementById("answ_ok").hidden = true;
             document.getElementById("answ_almost_ok").hidden = true;
             document.getElementById("answ_bad").hidden = true;
@@ -284,7 +297,7 @@
                 if (wrongAnswers === 0) {
                     document.getElementById("list_of_errors").innerHTML = "";
                 }
-                document.getElementById("list_of_errors").innerHTML += "<li>"+fraction_a.toString()+" + "+fraction_b.toString() +"</li>"; 
+                document.getElementById("list_of_errors").innerHTML += "<li>"+fraction_a.toHtmlString()+" + "+fraction_b.toHtmlString() +"</li>"; 
                 wrongAnswers++;
                 document.getElementById("answ_bad").hidden = false;
                 document.getElementById("next3").focus();
