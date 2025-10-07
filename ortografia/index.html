@@ -68,7 +68,7 @@
 
     <div class="row">
             <div class="col">
-                <a href="#" data-toggle="modal" data-target="#setRange" role="button">Ustaw zakres działań...</a> 
+                <a href="#" data-toggle="modal" data-target="#setWordList" role="button">Wybierz zestaw zadań..</a> 
                 <br/>
                 <a href="#" data-toggle="modal" data-target="#showErrs" role="button">Pokaż błędy...</a>
                 <hr/>
@@ -132,7 +132,33 @@
                 document.getElementById(letterId2).innerHTML = "";
                 document.getElementById(letterId2).hidden = true;
             }
+            document.getElementById("answ_ok").hidden = true;
+            document.getElementById("answ_bad").hidden = true;
+            document.getElementById("quest").hidden = false;            
             document.getElementById("answer").focus();
+        };
+
+
+        function check() {
+            var userAnswer = document.getElementById("answer").value;
+            if (userAnswer.toLowerCase() === answer.toLowerCase()) {
+                correctAnswers++;
+                document.getElementById("answ_ok").hidden = false;
+                document.getElementById("answ_bad").hidden = true;
+            } else {
+                wrongAnswers++;
+                var errorEntry = "<li>" + aWord.replace("_", "<b>__</b>") + " (prawidłowa odpowiedź: <b>" + answer + "</b>)</li>";
+                if (wrongAnswers === 1) { {
+                    document.getElementById("list_of_errors").innerHTML = errorEntry;
+                } else {
+                    document.getElementById("list_of_errors").innerHTML += errorEntry;
+                }
+                document.getElementById("answ_ok").hidden = true;
+                document.getElementById("answ_bad").hidden = false;
+            }
+            appState = 1;
+            updateStats();
+            document.getElementById("quest").hidden = true;
         };
 
         function handleEnterKey(e) {
@@ -144,6 +170,7 @@
                 }
             }
         }
+        reset();
         prepare();
     </script>
 
