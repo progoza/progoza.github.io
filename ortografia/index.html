@@ -99,16 +99,10 @@
         var correctAnswers = 0;
         var wrongAnswers = 0;
         var appState = 0;
-        var wordsList = [
-                { 
-                  word: "_ata", 
-                  answer: "ch"
-                },
-                { 
-                  word: "bo_ater", 
-                  answer: "h"
-                }
-            ];
+        var wordsList = [];
+        $.getJSON('zadania01.json', function(data) {
+            wordsList = data;
+        });
 
         function reset() {
             aWord = "";
@@ -177,7 +171,7 @@
                 }
             }
         }
-        reset();
+
         prepare();
     </script>
 
