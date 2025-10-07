@@ -135,7 +135,7 @@
             appState = 0;
             for (var i=0; i<aWord.length; i++) {
                 var letterId = "letter_" + i;
-                document.getElementById(letterId).innerHTML = aWord.charAt(i).toUpperCase;
+                document.getElementById(letterId).innerHTML = aWord.toUpperCase().charAt(i);
                 document.getElementById(letterId).hidden = false;
                 if (aWord.charAt(i) === "_") {
                     document.getElementById(letterId).innerHTML = '<input type="text" id="answer" autocapitalize="on" maxlength="2" size="2" autofocus />';
