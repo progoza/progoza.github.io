@@ -1,0 +1,172 @@
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <title>Ortografia</title>
+</head>
+	
+<body onKeyPress="return handleEnterKey(event)">
+
+    <div class="container" >
+      
+    <div class="jumbotron">
+        <h4>Nauka ortografii</h4>
+    </div>
+
+    <div class="row"> 
+        <div class="col">
+            Zadanie nr <span id="quest_no_title">1</span> (zadania z <span id="max_range_title">h i ch</span>):
+            <hr/>
+        </div>
+    </div>
+
+
+    <div class="row" id="quest">
+        <table class="table table-bordered">
+            <tr>
+                <td hidden="true" id="letter_0"></td>
+                <td hidden="true" id="letter_1"></td>
+                <td hidden="true" id="letter_2"></td>
+                <td hidden="true" id="letter_3"></td>
+                <td hidden="true" id="letter_4"></td>
+                <td hidden="true" id="letter_5"></td>
+                <td hidden="true" id="letter_6"></td>
+                <td hidden="true" id="letter_7"></td>
+                <td hidden="true" id="letter_8"></td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div class="row" id="answ_ok" hidden="true">
+        <div class="col-8" style="font-weight: bold; font-size: large; color: green; text-align:center"> 
+		    Dobrze! :-)
+        </div>
+		<div class="col-4">
+			<button class="btn btn-secondary btn-block" onclick="prepare()" >Dalej</button>    
+		</div>
+    </div>
+
+    <div class="row" id="answ_bad" hidden="true">
+        <div class="col-8" style="font-weight: bold; font-size: large; color: red; text-align:center"> 
+		    Niestety, zła odpowiedź :-(
+        </div>
+		<div class="col-4">
+                <button class="btn btn-secondary btn-block" onclick="prepare()" >Dalej</button>    
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <hr/>
+        </div>
+    </div>
+
+    <div class="row">
+            <div class="col">
+                <a href="#" data-toggle="modal" data-target="#setRange" role="button">Ustaw zakres działań...</a> 
+                <br/>
+                <a href="#" data-toggle="modal" data-target="#showErrs" role="button">Pokaż błędy...</a>
+                <hr/>
+            </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+                <span style="text-decoration:underline">Statystyki:</span> <br/>
+                Liczba zadań: <span id="quests_no">0</span> <br/>
+                Poprawnych odpowiedzi: <span id="oks_no">0</span> <br/>
+                Błędnych odpowiedzi: <span id="errs_no">0</span> <br/>
+        </div>
+	</div>
+	
+    <div class="row">
+        <div class="col" style="font-size: small; text-align:right">
+                v. 0.1
+        </div>
+	</div>
+
+    </div>
+
+    <script>
+        function reset() {
+            aWord = "";
+            answer = "";
+            wordsList = [
+                { 
+                  word: "_ata", 
+                  answer: "ch"
+                },
+                { 
+                  word: "bo_ater", 
+                  answer: "h"
+                }
+            ]
+            questNo = 0;
+            correctAnswers = 0;
+            wrongAnswers = 0;
+            appState = 0;
+            document.getElementById("list_of_errors").innerHTML = "Jak na razie nie ma żadnych błędów!";
+        }
+
+        function prepare() {
+            var randomIndex = Math.floor(Math.random() * wordsList.length);
+            aWord = wordsList[randomIndex].word;
+            answer = wordsList[randomIndex].answer;
+            questNo++;      
+            appState = 0;
+            for (var i=0; i<aWord.length; i++) {
+                var letterId = "letter_" + i;
+                document.getElementById(letterId).innerHTML = aWord.charAt(i);
+                document.getElementById(letterId).hidden = false;
+                if (aWord.charAt(i) === "_") {
+                    document.getElementById(letterId).innerHTML = '<input type="text" id="answer" maxlength="2" size="2" autofocus />';
+                }
+            }
+            for (var j=aWord.length; j<9; j++) {
+                var letterId2 = "letter_" + j;
+                document.getElementById(letterId2).innerHTML = "";
+                document.getElementById(letterId2).hidden = true;
+            }
+            document.getElementById("answer").focus();
+        };
+
+        function handleEnterKey(e) {
+            if((e && e.keyCode == 13) || e == 0) {
+                if (appState===0) {
+                    check();
+                }  else if (appState===1) {
+                    prepare();
+                }
+            }
+        }
+        prepare();
+    </script>
+
+<div  class="modal fade" id="showErrs" tabindex="-1" role="dialog" aria-labelledby="showErrsTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Działania w których był błąd:</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <ul id="list_of_errors">
+                            Jak na razie nie ma żadnych błędów!
+                    </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Zamknij</button>
+            </div>
+          </div>
+        </div>
+</div>
+
+</body>
+</html>
