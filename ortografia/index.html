@@ -99,10 +99,7 @@
         var correctAnswers = 0;
         var wrongAnswers = 0;
         var appState = 0;
-        var wordsList = [];
-        $.getJSON('zadania01.json', function(data) {
-            wordsList = data;
-        });
+        var wordsList = require('./zadania01.json');
 
         function reset() {
             aWord = "";
