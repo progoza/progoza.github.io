@@ -99,8 +99,12 @@
         var correctAnswers = 0;
         var wrongAnswers = 0;
         var appState = 0;
-        var wordsList = require('./zadania01.json');
-
+        var wordsList = [];
+        $.getJSON("zadania01.json", function(json) {
+            console.log(json);
+            wordsList = json;
+        });
+        
         function reset() {
             aWord = "";
             answer = "";
