@@ -93,10 +93,13 @@
     </div>
 
     <script>
-        function reset() {
-            aWord = "";
-            answer = "";
-            wordsList = [
+        var aWord = "";
+        var answer = "";
+        var questNo = 0;
+        var correctAnswers = 0;
+        var wrongAnswers = 0;
+        var appState = 0;
+        var wordsList = [
                 { 
                   word: "_ata", 
                   answer: "ch"
@@ -105,7 +108,11 @@
                   word: "bo_ater", 
                   answer: "h"
                 }
-            ]
+            ];
+
+        function reset() {
+            aWord = "";
+            answer = "";
             questNo = 0;
             correctAnswers = 0;
             wrongAnswers = 0;
