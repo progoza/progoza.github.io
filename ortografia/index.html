@@ -7,6 +7,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <title>Ortografia</title>
+    <style>
+        table td 
+        {
+        table-layout:fixed;
+        width:20px;
+        overflow:hidden;
+        word-wrap:break-word;
+        }
+    </style>
 </head>
 	
 <body onKeyPress="return handleEnterKey(event)">
@@ -37,6 +46,10 @@
                 <td hidden="true" id="letter_6"></td>
                 <td hidden="true" id="letter_7"></td>
                 <td hidden="true" id="letter_8"></td>
+                <td hidden="true" id="letter_9"></td>
+                <td hidden="true" id="letter_10"></td>
+                <td hidden="true" id="letter_11"></td>
+                <td hidden="true" id="letter_12"></td>
             </tr>
         </table>
     </div>
@@ -86,7 +99,7 @@
 	
     <div class="row">
         <div class="col" style="font-size: small; text-align:right">
-                v. 0.1.1
+                v. 0.9
         </div>
 	</div>
 
@@ -99,8 +112,11 @@
         var correctAnswers = 0;
         var wrongAnswers = 0;
         var appState = 0;
-        var wordsList = [];
+        var wordsList01 = [];
+        var wordsList02 = [];
+        var wordsList03= [];
         initializeWordsList();
+        var wordsList = wordsList01;
 
         function reset() {
             aWord = "";
@@ -160,6 +176,13 @@
             document.getElementById("quest").hidden = true;
         };
 
+        function updateStats() {
+            document.getElementById("quest_no_title").innerHTML = questNo;
+            document.getElementById("quests_no").innerHTML = questNo;
+            document.getElementById("oks_no").innerHTML = correctAnswers;
+            document.getElementById("errs_no").innerHTML = wrongAnswers;
+        };
+
         function handleEnterKey(e) {
             if((e && e.keyCode == 13) || e == 0) {
                 if (appState===0) {
@@ -170,8 +193,32 @@
             }
         }
 
+        function setWordList01() {
+            wordsList = wordsList01;
+            reset();
+            prepare();
+            updateStats();
+            document.getElementById("max_range_title").innerHTML = "h i ch";
+        };
+
+        function setWordList02() {
+            wordsList = wordsList02;
+            reset();
+            prepare();
+            updateStats();
+            document.getElementById("max_range_title").innerHTML = "ż i rz";
+        };
+
+        function setWordList03() {
+            wordsList = wordsList03;
+            reset();
+            prepare();
+            updateStats();
+            document.getElementById("max_range_title").innerHTML = "u i ó";
+        };
+        
         function initializeWordsList() {
-            wordsList = [
+            wordsList01 = [
                 { "word": "_uśtawka", "answer": "h" },
                 { "word": "sza_a", "answer": "ch" },
                 { "word": "_alka", "answer": "h" },
@@ -205,7 +252,44 @@
                 { "word": "_ipopotam", "answer": "h" },
                 { "word": "za_aczyć", "answer": "h" }   
             ];
-        }
+
+            wordsList02 = [
+                    { "word": "_aba", "answer": "ż" },
+                    { "word": "ma_enie", "answer": "rz" },
+                    { "word": "ko_yść", "answer": "rz" },
+                    { "word": "wie_a", "answer": "ż" },
+                    { "word": "pa_ysta", "answer": "rz" },
+                    { "word": "bie_nia", "answer": "ż" },
+                    { "word": "_eglować", "answer": "ż" },
+                    { "word": "obro_a", "answer": "ż" },
+                    { "word": "pla_a", "answer": "ż" },
+                    { "word": "wy_ek", "answer": "rz" },
+                    { "word": "_urek", "answer": "ż" },
+                    { "word": "u_ądzenie", "answer": "rz" },
+                    { "word": "spo_ądzić", "answer": "rz" }
+                ];                
+
+            wordsList03 = [
+                { "word":"b_t", "answer": "u" },
+                { "word":"m_cha", "answer": "u" },
+                { "word":"k_ra", "answer": "u" }, 
+                { "word":"autob_s", "answer": "u" },
+                { "word":"komp_ter", "answer": "u" },
+                { "word":"m_szelka", "answer": "u" },
+                { "word":"b_rza", "answer": "u" },
+                { "word":"_branie", "answer": "u" },
+                { "word":"b_telka", "answer": "u" },
+                { "word":"k_bek", "answer": "u" },
+                { "word":"kr_l", "answer": "ó" },
+                { "word":"w_zek", "answer": "ó" },
+                { "word":"ch_r", "answer": "ó" },
+                { "word":"pr_ba", "answer": "ó" },
+                { "word":"g_rka", "answer": "ó" },
+                { "word":"b_l", "answer": "ó" },
+                { "word":"st_ł", "answer": "ó" },
+                { "word":"m_wić", "answer": "ó" },
+            ];
+        };
         prepare();
     </script>
 
@@ -225,6 +309,28 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" data-dismiss="modal">Zamknij</button>
+            </div>
+          </div>
+        </div>
+</div>
+
+<div  class="modal fade" id="setsetWordsList" tabindex="-1" role="dialog" aria-labelledby="setWordsListTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Proszę ustaw zestaw słówek:</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p><span style="font-size: small">Ustawienie nowego zestawu wyzeruje statystyki.</span></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="setWordList01()" data-dismiss="modal">Słówka z H i CH</button>
+              <button type="button" class="btn btn-primary" onclick="setWordList01()" data-dismiss="modal">Słówka z Ż i RZ</button>
+              <button type="button" class="btn btn-primary" onclick="setWordList03()" data-dismiss="modal">Słówka z U i Ó</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
             </div>
           </div>
         </div>
