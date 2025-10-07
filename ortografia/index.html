@@ -135,13 +135,13 @@
             appState = 0;
             for (var i=0; i<aWord.length; i++) {
                 var letterId = "letter_" + i;
-                document.getElementById(letterId).innerHTML = aWord.charAt(i);
+                document.getElementById(letterId).innerHTML = aWord.charAt(i).toUpperCase;
                 document.getElementById(letterId).hidden = false;
                 if (aWord.charAt(i) === "_") {
-                    document.getElementById(letterId).innerHTML = '<input type="text" id="answer" maxlength="2" size="2" autofocus />';
+                    document.getElementById(letterId).innerHTML = '<input type="text" id="answer" autocapitalize="on" maxlength="2" size="2" autofocus />';
                 }
             }
-            for (var j=aWord.length; j<9; j++) {
+            for (var j=aWord.length; j<13; j++) {
                 var letterId2 = "letter_" + j;
                 document.getElementById(letterId2).innerHTML = "";
                 document.getElementById(letterId2).hidden = true;
