@@ -8,8 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <title>Ortografia</title>
     <style>
-        table td 
-        {
+        .lettercell {
         table-layout:fixed;
         width:20px;
         overflow:hidden;
@@ -35,21 +34,21 @@
 
 
     <div class="row" id="quest">
-        <table class="table table-bordered">
+        <table class="table table-bordered" align="center"">
             <tr>
-                <td hidden="true" id="letter_0"></td>
-                <td hidden="true" id="letter_1"></td>
-                <td hidden="true" id="letter_2"></td>
-                <td hidden="true" id="letter_3"></td>
-                <td hidden="true" id="letter_4"></td>
-                <td hidden="true" id="letter_5"></td>
-                <td hidden="true" id="letter_6"></td>
-                <td hidden="true" id="letter_7"></td>
-                <td hidden="true" id="letter_8"></td>
-                <td hidden="true" id="letter_9"></td>
-                <td hidden="true" id="letter_10"></td>
-                <td hidden="true" id="letter_11"></td>
-                <td hidden="true" id="letter_12"></td>
+                <td hidden="true" id="letter_0" class="lettercell"></td>
+                <td hidden="true" id="letter_1" class="lettercell"></td>
+                <td hidden="true" id="letter_2" class="lettercell"></td>
+                <td hidden="true" id="letter_3" class="lettercell"></td>
+                <td hidden="true" id="letter_4" class="lettercell"></td>
+                <td hidden="true" id="letter_5" class="lettercell"></td>
+                <td hidden="true" id="letter_6" class="lettercell"></td>
+                <td hidden="true" id="letter_7" class="lettercell"></td>
+                <td hidden="true" id="letter_8" class="lettercell"></td>
+                <td hidden="true" id="letter_9" class="lettercell"></td>
+                <td hidden="true" id="letter_10" class="lettercell"></td>
+                <td hidden="true" id="letter_11" class="lettercell"></td>
+                <td hidden="true" id="letter_12" class="lettercell"></td>
             </tr>
         </table>
     </div>
@@ -216,7 +215,7 @@
             updateStats();
             document.getElementById("max_range_title").innerHTML = "u i ó";
         };
-        
+
         function initializeWordsList() {
             wordsList01 = [
                 { "word": "_uśtawka", "answer": "h" },
@@ -314,7 +313,7 @@
         </div>
 </div>
 
-<div  class="modal fade" id="setsetWordsList" tabindex="-1" role="dialog" aria-labelledby="setWordsListTitle" aria-hidden="true">
+<div  class="modal fade" id="setWordList" tabindex="-1" role="dialog" aria-labelledby="setWordListTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
