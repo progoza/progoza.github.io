@@ -86,7 +86,7 @@
 	
     <div class="row">
         <div class="col" style="font-size: small; text-align:right">
-                v. 0.1
+                v. 0.1.1
         </div>
 	</div>
 
@@ -148,7 +148,7 @@
             } else {
                 wrongAnswers++;
                 var errorEntry = "<li>" + aWord.replace("_", "<b>__</b>") + " (prawidłowa odpowiedź: <b>" + answer + "</b>)</li>";
-                if (wrongAnswers === 1) { {
+                if (wrongAnswers === 1) { 
                     document.getElementById("list_of_errors").innerHTML = errorEntry;
                 } else {
                     document.getElementById("list_of_errors").innerHTML += errorEntry;
