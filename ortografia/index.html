@@ -136,7 +136,7 @@
 	
     <div class="row">
         <div class="col" style="font-size: small; text-align:right">
-                v. 1.0.10
+                v. 1.1.0
                 <a href="https://progoza.github.io" style="font-size: small; text-align:right">progoza.github.io</a>
         </div>
     </div>
@@ -155,6 +155,7 @@
         var wordsList03= [];
         initializeWordsList();
         var wordsList = wordsList01;
+        var previousRandomIndex = -1;
 
         var emots_good = ["😎", "😊", "👍", "💪", "🐣", "🌈", "♥️", "🤩", "😺", "🤗"];
         var emots_bad = ["😢", "😞", "😔", "😩", "😣","🙉", "😱", "👎", "💩", "💔"];
@@ -171,6 +172,10 @@
 
         function prepare() {
             var randomIndex = Math.floor(Math.random() * wordsList.length);
+            if (randomIndex === previousRandomIndex) {
+                randomIndex = (randomIndex + 1) % wordsList.length;
+            }
+            previousRandomIndex = randomIndex;
             aWord = wordsList[randomIndex].word;
             answer = wordsList[randomIndex].answer;
             questNo++;      
