@@ -36,6 +36,10 @@
             background-color: rgb(204, 160, 160);
             color: #ae0505;
         }
+        .answer_pending {
+            background-color: rgb(204, 204, 195);
+            color: black;
+        }
     </style>
 </head>
 	
@@ -49,7 +53,7 @@
 
     <div class="row"> 
         <div class="col">
-            Zadanie nr <span id="quest_no_title">1</span> (zadania z <span id="max_range_title">h i ch</span>):
+            Zadanie nr <span id="quest_no_title">1</span> (zadania z <span id="quest_type">"H" i "CH"</span>):
             <hr/>
         </div>
     </div>
@@ -132,7 +136,7 @@
 	
     <div class="row">
         <div class="col" style="font-size: small; text-align:right">
-                v. 1.0.9
+                v. 1.0.10
         </div>
 	</div>
 
@@ -191,6 +195,7 @@
             document.getElementById("answer_row").focus();
             document.getElementById("answer").classList.remove("answer_good");
             document.getElementById("answer").classList.remove("answer_bad");
+            document.getElementById("answer").classList.add("answer_pending");
         };
 
 
@@ -198,6 +203,7 @@
             document.getElementById("emot_good").innerHTML = emots_good[Math.floor(Math.random() * emots_good.length)];
             document.getElementById("emot_bad").innerHTML = emots_bad[Math.floor(Math.random() * emots_bad.length)];
             var userAnswer = document.getElementById("answer").value;
+            document.getElementById("answer").classList.remove("answer_pending");
             if (userAnswer.toLowerCase() === answer.toLowerCase()) {
                 correctAnswers++;
                 document.getElementById("answ_ok").hidden = false;
@@ -257,7 +263,7 @@
             updateStats();
             document.getElementById("answerA").innerHTML = buttonA;
             document.getElementById("answerB").innerHTML = buttonB;
-            document.getElementById("max_range_title").innerHTML = "h i ch";
+            document.getElementById("quest_type").innerHTML = "\"H\" i \"CH\"";
         };
 
         function setWordList02() {
@@ -269,7 +275,7 @@
             updateStats();
             document.getElementById("answerA").innerHTML = buttonA;
             document.getElementById("answerB").innerHTML = buttonB;
-            document.getElementById("max_range_title").innerHTML = "rz i ż";
+            document.getElementById("quest_type").innerHTML = "\"RZ\" i \"Ż\"";
         };
 
         function setWordList03() {
@@ -281,7 +287,7 @@
             updateStats();
             document.getElementById("answerA").innerHTML = buttonA;
             document.getElementById("answerB").innerHTML = buttonB;
-            document.getElementById("max_range_title").innerHTML = "u i ó";
+            document.getElementById("quest_type").innerHTML = "\"U\" i \"Ó\"";
         };
 
 
@@ -298,7 +304,7 @@
                 { "word": "_orągiew", "answer": "ch" },
                 { "word": "_ytry", "answer": "ch" },
                 { "word": "_erbatnik", "answer": "h" },
-                { "word": "_ojrak", "answer": "h" },
+                { "word": "_ojrak", "answer": "ch" },
                 { "word": "_luba", "answer": "ch" },
                 { "word": "plu_a", "answer": "ch" },
                 { "word": "o_ronić", "answer": "ch" },
