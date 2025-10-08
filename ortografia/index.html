@@ -64,12 +64,12 @@
     <dic class="row" id="answer_row">
         <div class="col-4"></div>
 
-        <div class="col-1 input-group input-group-lg" onclick="answerA()">
-            <span class="btn" id="answerA">CH</span>
+        <div class="col-1 input-group input-group-lg">
+            <button onclick="answerA()" class="btn" id="answerA">CH</button>
         </div>
         <div class="col-1"></div>
-        <div class="col-1 input-group input-group-lg" onclick="answerB()">
-            <span class="btn" id="answerB"">H</span>
+        <div class="col-1 input-group input-group-lg">
+            <button onclick="answerB()" class="btn" id="answerB">H</button>
         </div>
         <div class="col-1"></div>
         <div class="col-4"></div>
@@ -197,7 +197,6 @@
             }
             appState = 1;
             updateStats();
-            document.getElementById("quest").hidden = true;
         };
 
         function updateStats() {
