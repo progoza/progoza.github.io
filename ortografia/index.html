@@ -53,6 +53,19 @@
         </table>
     </div>
 
+    <dic class="row" id="answer_row">
+        <div class="col-4"></div>
+
+        <div class="col-1 input-group input-group-lg">
+                <span style="font-size: small; color: blue" id="answerA" onclick="">CH</span>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-1 input-group input-group-lg">
+                <span style="font-size: small; color: blue" id="answerB" onclick="">H</span>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-4"></div>
+    </dic>
 
     <div class="row" id="answ_ok" hidden="true">
         <div class="col-8" style="font-weight: bold; font-size: large; color: green; text-align:center"> 
@@ -105,6 +118,8 @@
     </div>
 
     <script>
+        var buttonA = "CH";
+        var buttonB = "H";
         var aWord = "";
         var answer = "";
         var questNo = 0;
@@ -182,6 +197,16 @@
             document.getElementById("errs_no").innerHTML = wrongAnswers;
         };
 
+        function answerA() {
+            document.getElementById("answer").value = buttonA;
+            check();
+        }
+
+        function answerB() {
+            document.getElementById("answer").value = buttonB;
+            check();
+        }   
+
         function handleEnterKey(e) {
             if((e && e.keyCode == 13) || e == 0) {
                 if (appState===0) {
@@ -194,27 +219,40 @@
 
         function setWordList01() {
             wordsList = wordsList01;
+            buttonA = "CH";
+            buttonB = "H";
             reset();
             prepare();
             updateStats();
+            document.getElementById("answerA").innerHTML = buttonA;
+            document.getElementById("answerB").innerHTML = buttonB;
             document.getElementById("max_range_title").innerHTML = "h i ch";
         };
 
         function setWordList02() {
             wordsList = wordsList02;
+            buttonA = "RZ";
+            buttonB = "Ż";
             reset();
             prepare();
             updateStats();
-            document.getElementById("max_range_title").innerHTML = "ż i rz";
+            document.getElementById("answerA").innerHTML = buttonA;
+            document.getElementById("answerB").innerHTML = buttonB;
+            document.getElementById("max_range_title").innerHTML = "rz i ż";
         };
 
         function setWordList03() {
             wordsList = wordsList03;
+            buttonA = "U";
+            buttonB = "Ó";
             reset();
             prepare();
             updateStats();
+            document.getElementById("answerA").innerHTML = buttonA;
+            document.getElementById("answerB").innerHTML = buttonB;
             document.getElementById("max_range_title").innerHTML = "u i ó";
         };
+
 
         function initializeWordsList() {
             wordsList01 = [
@@ -328,7 +366,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" onclick="setWordList01()" data-dismiss="modal">H i CH</button>
-              <button type="button" class="btn btn-primary" onclick="setWordList02()" data-dismiss="modal">Ż i RZ</button>
+              <button type="button" class="btn btn-primary" onclick="setWordList02()" data-dismiss="modal">RZ i Ż </div>button>
               <button type="button" class="btn btn-primary" onclick="setWordList03()" data-dismiss="modal">U i Ó</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
             </div>
