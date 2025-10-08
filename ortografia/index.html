@@ -22,6 +22,14 @@
             padding: 2px 12px 3px 12px;
             text-decoration: none;
         }
+        .answer_good {
+            background-color: rgb(168, 201, 177);
+            color: #034b1e;
+        }
+        .answer_bad {
+            background-color: rgb(204, 160, 160);
+            color: #ae0505;
+        }
     </style>
 </head>
 	
@@ -119,7 +127,7 @@
 	
     <div class="row">
         <div class="col" style="font-size: small; text-align:right">
-                v. 1.0.5
+                v. 1.0.6
         </div>
 	</div>
 
@@ -173,6 +181,8 @@
             document.getElementById("answ_bad").hidden = true;
             document.getElementById("answer_row").hidden = false;
             document.getElementById("answer_row").focus();
+            document.getElementById("answer").classList.remove("answer_good");
+            document.getElementById("answer").classList.remove("answer_bad");
         };
 
 
@@ -183,6 +193,7 @@
                 document.getElementById("answ_ok").hidden = false;
                 document.getElementById("answ_bad").hidden = true;
                 document.getElementById("answer_row").hidden = true;
+                document.getElementById("answer").classList.add("answer_good");
             } else {
                 wrongAnswers++;
                 var errorEntry = "<li>" + aWord.replace("_", "<b>__</b>") + " (prawidłowa odpowiedź: <b>" + answer + "</b>)</li>";
@@ -194,6 +205,7 @@
                 document.getElementById("answ_ok").hidden = true;
                 document.getElementById("answ_bad").hidden = false;
                 document.getElementById("answer_row").hidden = true;
+                document.getElementById("answer").classList.add("answer_bad");
             }
             appState = 1;
             updateStats();
