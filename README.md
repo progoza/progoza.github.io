@@ -19,6 +19,9 @@ _Paweł Rogoza_
 
 ### Otherstuff
 
- - Tool for kids to learn maths (__in Polish__): multiplication table [Tabliczka mnożenia](mnozenie/index.html), adding fractions [Dodawanie ułamków](ulamki/index.html) 
+ - Tool for kids to learn maths (__in Polish__): 
+   - multiplication table [Tabliczka mnożenia](mnozenie/index.html), 
+   - Polish ortography [Ortografia](ortografia/index.html), 
+   - adding fractions (not quite ready yet) [Dodawanie ułamków](ulamki/index.html) 
  - Report from the trip [around-the-world](https://www.youtube.com/watch?v=mb5Yl3ags2o) I made in 2018.
  - My profile on [Strava](https://www.strava.com/athletes/118798762)
