@@ -64,16 +64,12 @@
     <dic class="row" id="answer_row">
         <div class="col-4"></div>
 
-        <div class="col-1 input-group input-group-lg">
-            <a href="#" ">    
-            <span class="btn" id="answerA" onclick="answerA()"">CH</span>
-            </a>
+        <div class="col-1 input-group input-group-lg" onclick="answerA()">
+            <span class="btn" id="answerA">CH</span>
         </div>
         <div class="col-1"></div>
-        <div class="col-1 input-group input-group-lg">
-            <a href="#" > 
-            <span class="btn" id="answerB" onclick="answerB()">H</span>
-            </a>
+        <div class="col-1 input-group input-group-lg" onclick="answerB()>
+            <span class="btn" id="answerB"">H</span>
         </div>
         <div class="col-1"></div>
         <div class="col-4"></div>
@@ -123,7 +119,7 @@
 	
     <div class="row">
         <div class="col" style="font-size: small; text-align:right">
-                v. 1.0.2
+                v. 1.0.3
         </div>
 	</div>
 
@@ -175,7 +171,7 @@
             }
             document.getElementById("answ_ok").hidden = true;
             document.getElementById("answ_bad").hidden = true;
-            document.getElementById("answerRow").hidden = false;
+            document.getElementById("answer_row").hidden = false;
             document.getElementById("quest").hidden = false;            
             document.getElementById("answer").focus();
         };
@@ -187,7 +183,7 @@
                 correctAnswers++;
                 document.getElementById("answ_ok").hidden = false;
                 document.getElementById("answ_bad").hidden = true;
-                document.getElementById("answerRow").hidden = true;
+                document.getElementById("answer_row").hidden = true;
             } else {
                 wrongAnswers++;
                 var errorEntry = "<li>" + aWord.replace("_", "<b>__</b>") + " (prawidłowa odpowiedź: <b>" + answer + "</b>)</li>";
@@ -198,7 +194,7 @@
                 }
                 document.getElementById("answ_ok").hidden = true;
                 document.getElementById("answ_bad").hidden = false;
-                document.getElementById("answerRow").hidden = true;
+                document.getElementById("answer_row").hidden = true;
             }
             appState = 1;
             updateStats();
@@ -381,8 +377,9 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" onclick="setWordList01()" data-dismiss="modal">H i CH</button>
-              <button type="button" class="btn btn-primary" onclick="setWordList02()" data-dismiss="modal">RZ i Ż </div>button>
+              <button type="button" class="btn btn-primary" onclick="setWordList02()" data-dismiss="modal">RZ i Ż<button>
               <button type="button" class="btn btn-primary" onclick="setWordList03()" data-dismiss="modal">U i Ó</button>
+              <br/>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
             </div>
           </div>
