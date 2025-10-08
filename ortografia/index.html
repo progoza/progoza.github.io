@@ -14,6 +14,14 @@
         overflow:hidden;
         word-wrap:break-word;
         }
+        .btn {
+            background-color: rgb(7, 55, 99);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 2px 12px 3px 12px;
+            text-decoration: none;
+        }
     </style>
 </head>
 	
@@ -57,11 +65,15 @@
         <div class="col-4"></div>
 
         <div class="col-1 input-group input-group-lg">
-                <span style="font-size: small; color: blue" id="answerA" onclick="">CH</span>
+            <a href="#" onclick="answerA()">    
+            <span class="btn" id="answerA">CH</span>
+            </a>
         </div>
         <div class="col-1"></div>
         <div class="col-1 input-group input-group-lg">
-                <span style="font-size: small; color: blue" id="answerB" onclick="">H</span>
+            <a href="#" onclick="answerB()"> 
+            <span class="btn" id="answerB">H</span>
+            </a>
         </div>
         <div class="col-1"></div>
         <div class="col-4"></div>
@@ -111,7 +123,7 @@
 	
     <div class="row">
         <div class="col" style="font-size: small; text-align:right">
-                v. 1.0.0
+                v. 1.0.1
         </div>
 	</div>
 
