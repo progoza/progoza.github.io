@@ -19,7 +19,7 @@ _Paweł Rogoza_
 
 ### Otherstuff
 
- - Tool for kids to learn maths (__in Polish__): 
+ - Tools for kids to learn maths and ortography (__in Polish__): 
    - multiplication table [Tabliczka mnożenia](mnozenie/index.html), 
    - Polish ortography [Ortografia](ortografia/index.html), 
    - adding fractions (not quite ready yet) [Dodawanie ułamków](ulamki/index.html) 
